@@ -33,17 +33,17 @@ class _BlocProviderState<BlocType extends Bloc>
   BlocType _bloc;
 
   @override
+  void initState() {
+    super.initState();
+    _bloc = widget.creator(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return _Inherited<BlocType>(
       bloc: _bloc,
       child: Builder(builder: (context) => widget.builder(context)),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _bloc = widget.creator(context);
   }
 
   @override
