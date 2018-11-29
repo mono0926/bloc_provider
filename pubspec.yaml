@@ -1,6 +1,6 @@
 name: bloc_provider
 description: BLoC Provider
-version: 0.0.1
+version: 0.0.2
 author: Masayuki Ono <mono0926@gmail.com>
 homepage: https://github.com/mono0926/bloc_provider
 environment:
