@@ -1,16 +1,16 @@
 import 'package:bloc_provider/src/bloc.dart';
 import 'package:flutter/widgets.dart';
 
-typedef BlocCreator<BlocType extends Bloc> = BlocType Function(
+typedef _BlocCreator<BlocType extends Bloc> = BlocType Function(
     BuildContext context);
 
 class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   final WidgetBuilder builder;
-  final BlocCreator<BlocType> creator;
+  final _BlocCreator<BlocType> creator;
 
   BlocProvider({
     @required Widget child,
-    @required BlocCreator<BlocType> creator,
+    @required _BlocCreator<BlocType> creator,
   }) : this.builder(
           builder: (context) => child,
           creator: creator,
