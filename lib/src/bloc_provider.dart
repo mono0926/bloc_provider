@@ -12,7 +12,7 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
     @required Widget child,
     @required _BlocCreator<BlocType> creator,
   }) : this.builder(
-          builder: (context) => child,
+          childBuilder: (context) => child,
           creator: creator,
         );
 
