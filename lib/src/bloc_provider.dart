@@ -3,27 +3,22 @@ import 'package:flutter/widgets.dart';
 
 typedef _BlocCreator<BlocType extends Bloc> = BlocType Function(
     BuildContext context);
-typedef BlocCreated<BlocType extends Bloc> = Function(BlocType bloc);
 
 class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   final WidgetBuilder childBuilder;
   final _BlocCreator<BlocType> creator;
-  final BlocCreated<BlocType> blocCreated;
 
   BlocProvider({
     @required Widget child,
     @required _BlocCreator<BlocType> creator,
-    BlocCreated<BlocType> blocCreated,
   }) : this.builder(
           childBuilder: (context) => child,
           creator: creator,
-          blocCreated: blocCreated,
         );
 
   BlocProvider.builder({
     @required this.childBuilder,
     @required this.creator,
-    this.blocCreated,
   });
 
   @override
@@ -41,9 +36,6 @@ class _BlocProviderState<BlocType extends Bloc>
   void initState() {
     super.initState();
     _bloc = widget.creator(context);
-    if (widget.blocCreated != null) {
-      widget.blocCreated(_bloc);
-    }
   }
 
   @override
