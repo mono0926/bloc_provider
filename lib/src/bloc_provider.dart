@@ -7,19 +7,19 @@ typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
     BuildContext context, BlocType bloc);
 
 class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
-  final BlocBuilder<BlocType> childBuilder;
+  final BlocBuilder<BlocType> builder;
   final _BlocCreator<BlocType> creator;
 
   BlocProvider({
     @required Widget child,
     @required _BlocCreator<BlocType> creator,
   }) : this.builder(
-          childBuilder: (_context, _bloc) => child,
+          builder: (_context, _bloc) => child,
           creator: creator,
         );
 
   BlocProvider.builder({
-    @required this.childBuilder,
+    @required this.builder,
     @required this.creator,
   });
 
@@ -44,7 +44,7 @@ class _BlocProviderState<BlocType extends Bloc>
   Widget build(BuildContext context) {
     return _Inherited<BlocType>(
       bloc: _bloc,
-      child: widget.childBuilder(context, _bloc),
+      child: widget.builder(context, _bloc),
     );
   }
 
