@@ -1,0 +1,17 @@
+name: bloc_complex
+description: BLoC Provider example application.
+version: 1.0.0+1
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  rxdart: ^0.19.0
+  bloc_provider:
+    path: ../../../bloc_provider
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
