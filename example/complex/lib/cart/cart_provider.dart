@@ -5,7 +5,10 @@ import 'package:flutter/widgets.dart';
 class CartProvider extends BlocProvider<CartBloc> {
   CartProvider({
     @required Widget child,
-  }) : super(creator: (context) => CartBloc(), child: child);
+  }) : super(
+          creator: (context) => BlocCreationRequest(CartBloc()),
+          child: child,
+        );
 
   static CartBloc of(BuildContext context) => BlocProvider.of(context);
 }

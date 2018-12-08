@@ -1,3 +1,4 @@
+import 'package:bloc_complex/cart/cart_provider.dart';
 import 'package:bloc_complex/models/product.dart';
 import 'package:bloc_complex/product_grid/product_square_bloc.dart';
 import 'package:bloc_provider/bloc_provider.dart';
@@ -9,7 +10,15 @@ class ProductSquareProvider extends BlocProvider<ProductSquareBloc> {
     @required this.product,
     @required Widget child,
   }) : super(
-          creator: (context) => ProductSquareBloc(product),
+          creator: (context) {
+            final cartBloc = CartProvider.of(context);
+            final bloc = ProductSquareBloc(product);
+            final subscription = cartBloc.items.listen(bloc.cartItems.add);
+            return BlocCreationRequest(
+              bloc,
+              onDisposed: subscription.cancel,
+            );
+          },
           child: child,
         );
   static ProductSquareBloc of(BuildContext context) => BlocProvider.of(context);

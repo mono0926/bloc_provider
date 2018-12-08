@@ -9,7 +9,8 @@ class CatalogProvider extends BlocProvider<CatalogBloc> {
   }) : super(
           creator: (context) {
             final provider = ServiceProvider.of(context);
-            return CatalogBloc(catalogService: provider.catalogService);
+            return BlocCreationRequest(
+                CatalogBloc(catalogService: provider.catalogService));
           },
           child: child,
         );

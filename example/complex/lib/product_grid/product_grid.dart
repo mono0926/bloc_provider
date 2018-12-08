@@ -4,6 +4,7 @@ import 'package:bloc_complex/catalog/catalog_bloc.dart';
 import 'package:bloc_complex/catalog/catalog_provider.dart';
 import 'package:bloc_complex/catalog/catalog_slice.dart';
 import 'package:bloc_complex/product_grid/product_square.dart';
+import 'package:bloc_complex/product_grid/product_square_provider.dart';
 import 'package:flutter/material.dart';
 
 class ProductGrid extends StatelessWidget {
@@ -39,13 +40,15 @@ class ProductGrid extends StatelessWidget {
       return Center(child: CircularProgressIndicator());
     }
 
-    return ProductSquare(
-      key: Key(product.id.toString()),
+    return ProductSquareProvider(
       product: product,
-      itemsStream: cartBloc.items,
-      onTap: () {
-        cartBloc.cartAddition.add(CartAddition(product));
-      },
+      child: ProductSquare(
+        key: Key(product.id.toString()),
+        product: product,
+        onTap: () {
+          cartBloc.cartAddition.add(CartAddition(product));
+        },
+      ),
     );
   }
 }
