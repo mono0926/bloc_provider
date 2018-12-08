@@ -1,6 +1,7 @@
 import 'package:bloc_complex/cart/cart_bloc.dart';
 import 'package:bloc_complex/cart/cart_provider.dart';
 import 'package:bloc_complex/catalog/catalog_bloc.dart';
+import 'package:bloc_complex/catalog/catalog_provider.dart';
 import 'package:bloc_complex/catalog/catalog_slice.dart';
 import 'package:bloc_complex/product_grid/product_square.dart';
 import 'package:flutter/material.dart';

@@ -3,22 +3,19 @@ import 'dart:async';
 import 'package:bloc_complex/models/cart_item.dart';
 import 'package:bloc_complex/models/product.dart';
 import 'package:bloc_complex/services/cart.dart';
+import 'package:bloc_provider/bloc_provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CartAddition {
   final Product product;
   final int count;
 
-  CartAddition(this.product, [this.count = 1]);
+  CartAddition(this.product, {this.count = 1});
 }
 
-class CartBloc {
-  // This is the internal state. It's mostly a helper object so that the code
-  // in this class only deals with streams.
+class CartBloc implements Bloc {
   final _cart = CartService();
 
-  // These are the internal objects whose streams / sinks are provided
-  // by this component. See below for what each means.
   final _items = BehaviorSubject<List<CartItem>>(seedValue: []);
   final _itemCount = BehaviorSubject<int>(seedValue: 0);
   final _cartAdditionController = StreamController<CartAddition>();
@@ -34,6 +31,7 @@ class CartBloc {
 
   ValueObservable<List<CartItem>> get items => _items.stream;
 
+  @override
   void dispose() {
     _items.close();
     _itemCount.close();

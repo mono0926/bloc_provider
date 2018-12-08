@@ -14,8 +14,8 @@ class CartButton extends StatefulWidget {
     Key key,
     @required this.itemCount,
     this.onPressed,
-    this.badgeColor: Colors.red,
-    this.badgeTextColor: Colors.white,
+    this.badgeColor = Colors.red,
+    this.badgeTextColor = Colors.white,
   })  : assert(itemCount >= 0),
         assert(badgeColor != null),
         assert(badgeTextColor != null),
@@ -74,8 +74,9 @@ class CartButtonState extends State<CartButton>
   @override
   void didUpdateWidget(CartButton oldWidget) {
     if (widget.itemCount != oldWidget.itemCount) {
-      _animationController.reset();
-      _animationController.forward();
+      _animationController
+        ..reset()
+        ..forward();
     }
     super.didUpdateWidget(oldWidget);
   }

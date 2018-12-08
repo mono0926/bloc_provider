@@ -11,17 +11,20 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   final BlocBuilder<BlocType> builder;
 
   BlocProvider({
+    Key key,
     @required Widget child,
     @required BlocCreator<BlocType> creator,
   }) : this.builder(
+          key: key,
           builder: (_context, _bloc) => child,
           creator: creator,
         );
 
   BlocProvider.builder({
+    Key key,
     @required this.builder,
     @required this.creator,
-  });
+  }) : super(key: key);
 
   @override
   _BlocProviderState createState() => _BlocProviderState<BlocType>();

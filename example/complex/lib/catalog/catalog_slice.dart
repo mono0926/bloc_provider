@@ -10,7 +10,7 @@ class CatalogSlice {
 
   final bool hasNext;
 
-  CatalogSlice(this._pages, this.hasNext)
+  CatalogSlice(this._pages, {this.hasNext})
       : startIndex = _pages.map((p) => p.startIndex).fold(0x7FFFFFFF, min);
 
   const CatalogSlice.empty()

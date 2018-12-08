@@ -59,7 +59,9 @@ class CartService {
         return;
       }
     }
-    if (difference < 0) return;
+    if (difference < 0) {
+      return;
+    }
     _items.add(CartItem(max(difference, 0), product));
     _notifyListeners();
   }

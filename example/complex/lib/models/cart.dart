@@ -32,7 +32,9 @@ class Cart {
   String toString() => '$items';
 
   void _updateCount(Product product, int difference) {
-    if (difference == 0) return;
+    if (difference == 0) {
+      return;
+    }
     for (int i = 0; i < _items.length; i++) {
       final item = _items[i];
       if (product == item.product) {
@@ -45,7 +47,9 @@ class Cart {
         return;
       }
     }
-    if (difference < 0) return;
+    if (difference < 0) {
+      return;
+    }
     _items.add(CartItem(max(difference, 0), product));
   }
 }

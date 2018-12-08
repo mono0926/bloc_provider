@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:bloc_complex/catalog/catalog_slice.dart';
 import 'package:bloc_complex/services/catalog.dart';
 import 'package:bloc_complex/services/catalog_page.dart';
+import 'package:bloc_provider/bloc_provider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rxdart/rxdart.dart';
 
-class CatalogBloc {
+@immutable
+class CatalogBloc implements Bloc {
   final _indexController = PublishSubject<int>();
 
   final _pages = <int, CatalogPage>{};
@@ -16,13 +18,13 @@ class CatalogBloc {
   final _sliceSubject =
       BehaviorSubject<CatalogSlice>(seedValue: CatalogSlice.empty());
 
-  final CatalogService _catalogService;
+  final CatalogService catalogService;
 
-  CatalogBloc(this._catalogService) {
+  CatalogBloc({
+    @required this.catalogService,
+  }) {
     _indexController.stream
-        // Don't try to update too frequently.
         .bufferTime(Duration(milliseconds: 500))
-        // Don't update when there is no need.
         .where((batch) => batch.isNotEmpty)
         .listen(_handleIndexes);
   }
@@ -46,11 +48,15 @@ class CatalogBloc {
     for (int i = minPageIndex;
         i <= maxPageIndex;
         i += CatalogService.productsPerPage) {
-      if (_pages.containsKey(i)) continue;
-      if (_pagesBeingRequested.contains(i)) continue;
+      if (_pages.containsKey(i)) {
+        continue;
+      }
+      if (_pagesBeingRequested.contains(i)) {
+        continue;
+      }
 
       _pagesBeingRequested.add(i);
-      _catalogService.requestPage(i).then((page) => _handleNewPage(page, i));
+      catalogService.requestPage(i).then((page) => _handleNewPage(page, i));
     }
 
     _pages.removeWhere((pageIndex, _) =>
@@ -67,27 +73,13 @@ class CatalogBloc {
   void _sendNewSlice() {
     final pages = _pages.values.toList(growable: false);
 
-    final slice = CatalogSlice(pages, true);
+    final slice = CatalogSlice(pages, hasNext: true);
 
     _sliceSubject.add(slice);
   }
-}
-
-class CatalogProvider extends InheritedWidget {
-  final CatalogBloc catalogBloc;
-
-  CatalogProvider({
-    Key key,
-    @required CatalogBloc catalog,
-    Widget child,
-  })  : assert(catalog != null),
-        catalogBloc = catalog,
-        super(key: key, child: child);
 
   @override
-  bool updateShouldNotify(InheritedWidget oldWidget) => true;
-
-  static CatalogBloc of(BuildContext context) =>
-      (context.inheritFromWidgetOfExactType(CatalogProvider) as CatalogProvider)
-          .catalogBloc;
+  void dispose() {
+    _indexController.close();
+  }
 }

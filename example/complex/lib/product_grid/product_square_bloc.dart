@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:bloc_complex/models/cart_item.dart';
 import 'package:bloc_complex/models/product.dart';
+import 'package:bloc_provider/bloc_provider.dart';
 import 'package:rxdart/rxdart.dart';
 
-class ProductSquareBloc {
+class ProductSquareBloc implements Bloc {
   final _isInCartSubject = BehaviorSubject<bool>(seedValue: false);
 
   final _cartItemsController = StreamController<List<CartItem>>();
@@ -19,6 +20,7 @@ class ProductSquareBloc {
 
   ValueObservable<bool> get isInCart => _isInCartSubject.stream;
 
+  @override
   void dispose() {
     _cartItemsController.close();
     _isInCartSubject.close();

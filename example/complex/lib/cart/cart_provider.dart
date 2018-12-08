@@ -1,20 +1,11 @@
 import 'package:bloc_complex/cart/cart_bloc.dart';
+import 'package:bloc_provider/bloc_provider.dart';
 import 'package:flutter/widgets.dart';
 
-class CartProvider extends InheritedWidget {
-  final CartBloc cartBloc;
-
+class CartProvider extends BlocProvider<CartBloc> {
   CartProvider({
-    Key key,
-    CartBloc cartBloc,
-    Widget child,
-  })  : cartBloc = cartBloc ?? CartBloc(),
-        super(key: key, child: child);
+    @required Widget child,
+  }) : super(creator: (context) => CartBloc(), child: child);
 
-  @override
-  bool updateShouldNotify(InheritedWidget oldWidget) => true;
-
-  static CartBloc of(BuildContext context) =>
-      (context.inheritFromWidgetOfExactType(CartProvider) as CartProvider)
-          .cartBloc;
+  static CartBloc of(BuildContext context) => BlocProvider.of(context);
 }

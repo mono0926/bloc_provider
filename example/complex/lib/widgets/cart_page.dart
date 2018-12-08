@@ -7,13 +7,13 @@ class CartPage extends StatelessWidget {
   CartPage(this.cart);
   final Cart cart;
 
-  static const routeName = "/cart";
+  static const routeName = '/cart';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your Cart"),
+        title: Text('Your Cart'),
       ),
       body: cart.items.isEmpty
           ? Center(
