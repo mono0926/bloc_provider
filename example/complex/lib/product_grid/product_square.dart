@@ -16,18 +16,22 @@ class ProductSquare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = ProductSquareProvider.of(context);
-    return Material(
-      color: product.color,
-      child: InkWell(
-        onTap: onTap,
-        child: Center(
-          child: StreamBuilder<bool>(
-              stream: bloc.isInCart,
-              initialData: bloc.isInCart.value,
-              builder: (context, snapshot) => _createText(snapshot.data)),
-        ),
-      ),
+    return ProductSquareProvider(
+      product: product,
+      builder: (context, bloc) {
+        return Material(
+          color: product.color,
+          child: InkWell(
+            onTap: onTap,
+            child: Center(
+              child: StreamBuilder<bool>(
+                  stream: bloc.isInCart,
+                  initialData: bloc.isInCart.value,
+                  builder: (context, snapshot) => _createText(snapshot.data)),
+            ),
+          ),
+        );
+      },
     );
   }
 

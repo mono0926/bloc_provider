@@ -10,7 +10,6 @@ class ProductSquareBloc implements Bloc {
 
   final _cartItemsController = StreamController<List<CartItem>>();
 
-  // TODO: productをStreamで与える？
   ProductSquareBloc(Product product) {
     _cartItemsController.stream
         .map((list) => list.any((item) => item.product == product))

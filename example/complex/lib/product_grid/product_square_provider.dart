@@ -8,8 +8,8 @@ class ProductSquareProvider extends BlocProvider<ProductSquareBloc> {
   final Product product;
   ProductSquareProvider({
     @required this.product,
-    @required Widget child,
-  }) : super(
+    @required BlocBuilder<ProductSquareBloc> builder,
+  }) : super.builder(
           creator: (context) {
             final cartBloc = CartProvider.of(context);
             final bloc = ProductSquareBloc(product);
@@ -19,7 +19,7 @@ class ProductSquareProvider extends BlocProvider<ProductSquareBloc> {
               onDisposed: subscription.cancel,
             );
           },
-          child: child,
+          builder: builder,
         );
   static ProductSquareBloc of(BuildContext context) => BlocProvider.of(context);
 }
