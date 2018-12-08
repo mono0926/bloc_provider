@@ -1,8 +1,17 @@
 import 'package:bloc_provider/src/bloc.dart';
 import 'package:flutter/widgets.dart';
 
-typedef BlocCreator<BlocType extends Bloc> = BlocType Function(
-    BuildContext context);
+typedef OnDisposed = void Function();
+
+class BlocCreationRequest<BlocType extends Bloc> {
+  final BlocType bloc;
+  final OnDisposed onDisposed;
+
+  BlocCreationRequest(this.bloc, {this.onDisposed});
+}
+
+typedef BlocCreator<BlocType extends Bloc> = BlocCreationRequest<BlocType>
+    Function(BuildContext context);
 typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
     BuildContext context, BlocType bloc);
 
@@ -36,11 +45,14 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
 class _BlocProviderState<BlocType extends Bloc>
     extends State<BlocProvider<BlocType>> {
   BlocType _bloc;
+  OnDisposed _onDisposed;
 
   @override
   void initState() {
     super.initState();
-    _bloc = widget.creator(context);
+    final result = widget.creator(context);
+    _bloc = result.bloc;
+    _onDisposed = result.onDisposed;
   }
 
   @override
@@ -54,6 +66,9 @@ class _BlocProviderState<BlocType extends Bloc>
   @override
   void dispose() {
     _bloc.dispose();
+    if (_onDisposed != null) {
+      _onDisposed();
+    }
     super.dispose();
   }
 }
