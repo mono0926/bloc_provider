@@ -6,7 +6,7 @@ class CartProvider extends BlocProvider<CartBloc> {
   CartProvider({
     @required Widget child,
   }) : super(
-          creator: (context) => BlocCreationRequest(CartBloc()),
+          creator: (context, _bag) => CartBloc(),
           child: child,
         );
 

@@ -7,10 +7,9 @@ class CatalogProvider extends BlocProvider<CatalogBloc> {
   CatalogProvider({
     @required Widget child,
   }) : super(
-          creator: (context) {
+          creator: (context, _bag) {
             final provider = ServiceProvider.of(context);
-            return BlocCreationRequest(
-                CatalogBloc(catalogService: provider.catalogService));
+            return CatalogBloc(catalogService: provider.catalogService);
           },
           child: child,
         );
