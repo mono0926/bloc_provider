@@ -7,7 +7,6 @@ class CounterBlocProvider extends BlocProvider<CounterBloc> {
     @required Widget child,
   }) : super(
           child: child,
-          // TODO: contextから取得したオブジェクトをDI
           creator: (context, _bag) {
             assert(context != null);
             return CounterBloc();
