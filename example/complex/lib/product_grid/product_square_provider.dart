@@ -10,11 +10,11 @@ class ProductSquareProvider extends BlocProvider<ProductSquareBloc> {
     @required this.product,
     @required BlocBuilder<ProductSquareBloc> builder,
   }) : super.builder(
-          creator: (context, _bag) {
+          creator: (context, bag) {
             final cartBloc = CartProvider.of(context);
             final bloc = ProductSquareBloc(product);
             final subscription = cartBloc.items.listen(bloc.cartItems.add);
-            _bag.register(onDisposed: subscription.cancel);
+            bag.register(onDisposed: subscription.cancel);
             return bloc;
           },
           builder: builder,
