@@ -2,9 +2,12 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:meta/meta.dart';
+
 import '../models/product.dart';
 import 'catalog_page.dart';
 
+@immutable
 class CatalogService {
   static int productsPerPage = 10;
 

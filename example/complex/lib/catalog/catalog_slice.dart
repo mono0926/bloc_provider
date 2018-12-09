@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:bloc_complex/models/product.dart';
 import 'package:bloc_complex/services/catalog_page.dart';
+import 'package:meta/meta.dart';
 
+@immutable
 class CatalogSlice {
   final List<CatalogPage> _pages;
 

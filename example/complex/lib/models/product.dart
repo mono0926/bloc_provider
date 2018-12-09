@@ -1,5 +1,8 @@
 import 'dart:ui' show Color;
 
+import 'package:meta/meta.dart';
+
+@immutable
 class Product {
   final int id;
 

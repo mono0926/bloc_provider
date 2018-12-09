@@ -4,6 +4,7 @@ import 'package:bloc_complex/product_grid/product_square_bloc.dart';
 import 'package:bloc_provider/bloc_provider.dart';
 import 'package:flutter/widgets.dart';
 
+@immutable
 class ProductSquareProvider extends BlocProvider<ProductSquareBloc> {
   final Product product;
   ProductSquareProvider({

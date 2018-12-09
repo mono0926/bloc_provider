@@ -4,8 +4,10 @@ import 'package:bloc_complex/models/cart_item.dart';
 import 'package:bloc_complex/models/product.dart';
 import 'package:bloc_complex/services/cart.dart';
 import 'package:bloc_provider/bloc_provider.dart';
+import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
+@immutable
 class CartAddition {
   final Product product;
   final int count;
@@ -13,6 +15,7 @@ class CartAddition {
   CartAddition(this.product, {this.count = 1});
 }
 
+@immutable
 class CartBloc implements Bloc {
   final _cart = CartService();
 

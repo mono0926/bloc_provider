@@ -1,7 +1,10 @@
 import 'dart:collection';
 
+import 'package:meta/meta.dart';
+
 import '../models/product.dart';
 
+@immutable
 class CatalogPage {
   final List<Product> _products;
 

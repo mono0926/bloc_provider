@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:bloc_complex/models/cart_item.dart';
 import 'package:bloc_complex/models/product.dart';
 import 'package:bloc_provider/bloc_provider.dart';
+import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
+@immutable
 class ProductSquareBloc implements Bloc {
   final _isInCartSubject = BehaviorSubject<bool>(seedValue: false);
 

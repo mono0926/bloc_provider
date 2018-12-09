@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:ui' show Color;
 
+import 'package:meta/meta.dart';
+
 import 'product.dart';
 
 final Catalog catalog = fetchCatalogSync();
@@ -21,6 +23,7 @@ Future<Null> updateCatalog(Catalog catalog) {
   });
 }
 
+@immutable
 class Catalog {
   static const List<Product> _sampleProducts = <Product>[
     Product(42, 'Sweater', Color(0xFF536DFE)),

@@ -72,6 +72,7 @@ class _BlocProviderState<BlocType extends Bloc>
   }
 }
 
+@immutable
 class _Inherited<BlocType extends Bloc> extends InheritedWidget {
   final BlocType bloc;
 
@@ -87,10 +88,6 @@ class _Inherited<BlocType extends Bloc> extends InheritedWidget {
                 typeOf<_Inherited<BlocType>>())
             .widget as _Inherited<BlocType>)
         .bloc;
-    // TODO: Which is better?
-    // return (context.inheritFromWidgetOfExactType(
-    //         typeOf<_ProviderInherited<T>>()) as _ProviderInherited<T>)
-    //     .bloc;
   }
 
   @override

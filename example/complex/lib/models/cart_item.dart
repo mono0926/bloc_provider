@@ -1,5 +1,8 @@
+import 'package:meta/meta.dart';
+
 import 'product.dart';
 
+@immutable
 class CartItem {
   final int count;
   final Product product;

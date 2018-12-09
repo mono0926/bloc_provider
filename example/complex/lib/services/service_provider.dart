@@ -1,6 +1,7 @@
 import 'package:bloc_complex/services/catalog.dart';
 import 'package:flutter/widgets.dart';
 
+@immutable
 class ServiceProvider extends InheritedWidget {
   final CatalogService catalogService;
 
