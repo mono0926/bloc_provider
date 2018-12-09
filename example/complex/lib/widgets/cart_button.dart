@@ -3,11 +3,8 @@ import 'package:meta/meta.dart';
 
 class CartButton extends StatefulWidget {
   final VoidCallback onPressed;
-
   final int itemCount;
-
   final Color badgeColor;
-
   final Color badgeTextColor;
 
   CartButton({
@@ -22,9 +19,7 @@ class CartButton extends StatefulWidget {
         super(key: key);
 
   @override
-  CartButtonState createState() {
-    return CartButtonState();
-  }
+  CartButtonState createState() => CartButtonState();
 }
 
 class CartButtonState extends State<CartButton>
@@ -38,37 +33,51 @@ class CartButtonState extends State<CartButton>
   );
 
   @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    _animation =
+        CurvedAnimation(parent: _animationController, curve: Curves.elasticOut);
+    _animationController.forward();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return IconButton(
-        icon: Stack(
-          overflow: Overflow.visible,
-          children: [
-            Icon(Icons.shopping_cart),
-            Positioned(
-              top: -8,
-              right: -3,
-              child: SlideTransition(
-                position: _badgePositionTween.animate(_animation),
-                child: Material(
-                    type: MaterialType.circle,
-                    elevation: 2,
-                    color: Colors.red,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Text(
-                        widget.itemCount.toString(),
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: widget.badgeTextColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )),
+      icon: Stack(
+        overflow: Overflow.visible,
+        children: [
+          Icon(Icons.shopping_cart),
+          Positioned(
+            top: -8,
+            right: -3,
+            child: SlideTransition(
+              position: _badgePositionTween.animate(_animation),
+              child: Material(
+                type: MaterialType.circle,
+                elevation: 2,
+                color: Colors.red,
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text(
+                    widget.itemCount.toString(),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: widget.badgeTextColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
-        onPressed: widget.onPressed);
+          ),
+        ],
+      ),
+      onPressed: widget.onPressed,
+    );
   }
 
   @override
@@ -85,17 +94,5 @@ class CartButtonState extends State<CartButton>
   void dispose() {
     _animationController.dispose();
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      vsync: this,
-    );
-    _animation =
-        CurvedAnimation(parent: _animationController, curve: Curves.elasticOut);
-    _animationController.forward();
   }
 }

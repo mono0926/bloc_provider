@@ -24,7 +24,8 @@ class ProductSquare extends StatelessWidget {
           child: Text(
             product.name,
             style: TextStyle(
-                color: isDark(product.color) ? Colors.white : Colors.black),
+              color: isDark(product.color) ? Colors.white : Colors.black,
+            ),
           ),
         ),
       ),

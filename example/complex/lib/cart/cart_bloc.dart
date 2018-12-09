@@ -34,16 +34,16 @@ class CartBloc implements Bloc {
 
   ValueObservable<List<CartItem>> get items => _items.stream;
 
+  void _handleAddition(CartAddition addition) {
+    _cart.add(addition.product, addition.count);
+    _items.add(_cart.items);
+    _itemCount.add(_cart.itemCount);
+  }
+
   @override
   void dispose() {
     _items.close();
     _itemCount.close();
     _cartAdditionController.close();
-  }
-
-  void _handleAddition(CartAddition addition) {
-    _cart.add(addition.product, addition.count);
-    _items.add(_cart.items);
-    _itemCount.add(_cart.itemCount);
   }
 }

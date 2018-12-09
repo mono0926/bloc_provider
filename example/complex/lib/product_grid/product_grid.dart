@@ -29,8 +29,12 @@ class ProductGrid extends StatelessWidget {
     );
   }
 
-  Widget _createSquare(int index, CatalogSlice slice, CatalogBloc catalogBloc,
-      CartBloc cartBloc) {
+  Widget _createSquare(
+    int index,
+    CatalogSlice slice,
+    CatalogBloc catalogBloc,
+    CartBloc cartBloc,
+  ) {
     catalogBloc.index.add(index);
 
     final product = slice.elementAt(index);

@@ -16,18 +16,20 @@ class BlocCartPage extends StatelessWidget {
         title: Text('Your Cart'),
       ),
       body: StreamBuilder<List<CartItem>>(
-          stream: cart.items,
-          builder: (context, snapshot) {
-            if (snapshot.data?.isEmpty ?? true) {
-              return Center(
-                  child: Text('Empty',
-                      style: Theme.of(context).textTheme.display1));
-            }
+        stream: cart.items,
+        builder: (context, snapshot) {
+          if (snapshot.data?.isEmpty ?? true) {
+            return Center(
+              child: Text('Empty', style: Theme.of(context).textTheme.display1),
+            );
+          }
 
-            return ListView(
-                children:
-                    snapshot.data.map((item) => ItemTile(item: item)).toList());
-          }),
+          return ListView(
+            children:
+                snapshot.data.map((item) => ItemTile(item: item)).toList(),
+          );
+        },
+      ),
     );
   }
 }

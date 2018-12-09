@@ -17,10 +17,11 @@ class CartPage extends StatelessWidget {
       ),
       body: cart.items.isEmpty
           ? Center(
-              child: Text('Empty', style: Theme.of(context).textTheme.display1))
+              child: Text('Empty', style: Theme.of(context).textTheme.display1),
+            )
           : ListView(
-              children:
-                  cart.items.map((item) => ItemTile(item: item)).toList()),
+              children: cart.items.map((item) => ItemTile(item: item)).toList(),
+            ),
     );
   }
 }
@@ -32,7 +33,8 @@ class ItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = TextStyle(
-        color: isDark(item.product.color) ? Colors.white : Colors.black);
+      color: isDark(item.product.color) ? Colors.white : Colors.black,
+    );
 
     return Container(
       color: item.product.color,
@@ -42,8 +44,12 @@ class ItemTile extends StatelessWidget {
           style: textStyle,
         ),
         trailing: CircleAvatar(
-            backgroundColor: const Color(0x33FFFFFF),
-            child: Text(item.count.toString(), style: textStyle)),
+          backgroundColor: const Color(0x33FFFFFF),
+          child: Text(
+            item.count.toString(),
+            style: textStyle,
+          ),
+        ),
       ),
     );
   }

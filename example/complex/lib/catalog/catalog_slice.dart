@@ -23,7 +23,6 @@ class CatalogSlice {
   int get endIndex =>
       startIndex + _pages.map((page) => page.endIndex).fold<int>(-1, max);
 
-  /// Returns the product at [index], or `null` if data isn't loaded yet.
   Product elementAt(int index) {
     for (final page in _pages) {
       if (index >= page.startIndex && index <= page.endIndex) {

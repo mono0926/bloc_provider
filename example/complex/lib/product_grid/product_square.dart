@@ -25,9 +25,10 @@ class ProductSquare extends StatelessWidget {
             onTap: onTap,
             child: Center(
               child: StreamBuilder<bool>(
-                  stream: bloc.isInCart,
-                  initialData: bloc.isInCart.value,
-                  builder: (context, snapshot) => _createText(snapshot.data)),
+                stream: bloc.isInCart,
+                initialData: bloc.isInCart.value,
+                builder: (context, snapshot) => _createText(snapshot.data),
+              ),
             ),
           ),
         );
