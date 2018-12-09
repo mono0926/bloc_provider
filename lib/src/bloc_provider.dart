@@ -1,10 +1,14 @@
 import 'package:bloc_provider/src/bloc.dart';
 import 'package:flutter/widgets.dart';
 
-typedef OnDisposed = void Function();
-
 class BlocCreatorBag {
-  OnDisposed onDisposed;
+  VoidCallback _onDisposed;
+  // ignore: use_setters_to_change_properties
+  void register({VoidCallback onDisposed}) {
+    _onDisposed = onDisposed;
+  }
+
+  VoidCallback get onDisposed => _onDisposed;
 }
 
 typedef BlocCreator<BlocType extends Bloc> = BlocType Function(

@@ -14,7 +14,7 @@ class ProductSquareProvider extends BlocProvider<ProductSquareBloc> {
             final cartBloc = CartProvider.of(context);
             final bloc = ProductSquareBloc(product);
             final subscription = cartBloc.items.listen(bloc.cartItems.add);
-            _bag.onDisposed = subscription.cancel;
+            _bag.register(onDisposed: subscription.cancel);
             return bloc;
           },
           builder: builder,
