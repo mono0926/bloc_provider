@@ -20,17 +20,17 @@ class _PositionedTilesState extends State<PositionedTiles> {
 //      StatelessTile(title: 'B'),
 //    ];
 
-    // Not work
-//    tiles = [
-//      BlocTile(title: 'A'),
-//      BlocTile(title: 'B'),
-//    ];
-
-    // Works well
+    // Not work if BlocProvider's key is omitted.
     tiles = [
-      BlocTile(title: 'A', key: Key('A')),
-      BlocTile(title: 'B', key: Key('B')),
+      BlocTile(title: 'A'),
+      BlocTile(title: 'B'),
     ];
+
+    // Works well even if BlocProvider's key is omitted.
+//    tiles = [
+//      BlocTile(title: 'A', key: Key('A')),
+//      BlocTile(title: 'B', key: Key('B')),
+//    ];
   }
 
   @override
@@ -76,6 +76,7 @@ class BlocTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TitleBloc>.builder(
+      key: Key(title),
       creator: (context, _bag) {
         return TitleBloc(title);
       },
