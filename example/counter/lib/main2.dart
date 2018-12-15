@@ -1,15 +1,19 @@
+import 'package:bloc_provider/bloc_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_bloc/bloc/counter_bloc.dart';
 
-void main() => runApp(App(bloc: CounterBloc()));
+import 'bloc/counter_bloc.dart';
+
+void main() => runApp(
+      BlocProvider<CounterBloc>(
+        creator: (context, _bag) => CounterBloc(),
+        child: App(),
+      ),
+    );
 
 class App extends StatelessWidget {
-  final CounterBloc bloc;
-
-  const App({@required this.bloc});
-
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<CounterBloc>(context);
     return MaterialApp(
       home: Scaffold(
         body: Center(

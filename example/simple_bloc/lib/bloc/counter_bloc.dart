@@ -10,7 +10,7 @@ class CounterBloc {
         .pipe(_countController);
   }
 
-  Stream<int> get count => _countController;
+  ValueObservable<int> get count => _countController;
   Sink<void> get increment => _incrementController.sink;
 
   void dispose() async {

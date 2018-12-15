@@ -19,12 +19,22 @@ class _PositionedTilesState extends State<PositionedTiles> {
 //      StatelessTile(title: 'A'),
 //      StatelessTile(title: 'B'),
 //    ];
+    // Not work
+//    tiles = [
+//      StatefulTile(title: 'A'),
+//      StatefulTile(title: 'B'),
+//    ];
+    // Works well
+    tiles = [
+      StatefulTile(title: 'A', key: Key('A')),
+      StatefulTile(title: 'B', key: Key('B')),
+    ];
 
     // Not work if BlocProvider's key is omitted.
-    tiles = [
-      BlocTile(title: 'A'),
-      BlocTile(title: 'B'),
-    ];
+//    tiles = [
+//      BlocTile(title: 'A'),
+//      BlocTile(title: 'B'),
+//    ];
 
     // Works well even if BlocProvider's key is omitted.
 //    tiles = [
@@ -66,6 +76,39 @@ class StatelessTile extends StatelessWidget {
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.debug}) {
     return 'tile($title)';
+  }
+}
+
+class StatefulTile extends StatefulWidget {
+  final String title;
+
+  const StatefulTile({Key key, @required this.title}) : super(key: key);
+
+  @override
+  StatefulTileState createState() => StatefulTileState(title: title);
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.debug}) {
+    return 'tile($title)';
+  }
+}
+
+class StatefulTileState extends State<StatefulTile> {
+  final String title;
+
+  StatefulTileState({@required this.title});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(title),
+      height: 44,
+      padding: EdgeInsets.all(16),
+    );
+  }
+
+  @override
+  void dispose() {
+    print('disposed: ${title}');
+    super.dispose();
   }
 }
 

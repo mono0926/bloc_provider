@@ -18,7 +18,7 @@ class App extends StatelessWidget {
         body: Center(
           child: StreamBuilder<int>(
             stream: bloc.count,
-            initialData: 0,
+            initialData: bloc.count.value,
             builder: (context, snap) => Text(
                   'count: ${snap.data}',
                   style: Theme.of(context).textTheme.title,
