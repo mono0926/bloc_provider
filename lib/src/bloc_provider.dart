@@ -1,5 +1,11 @@
-import 'package:bloc_provider/src/bloc.dart';
 import 'package:flutter/widgets.dart';
+
+import 'bloc.dart';
+
+typedef BlocCreator<BlocType extends Bloc> = BlocType Function(
+    BuildContext context, BlocCreatorBag bag);
+typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
+    BuildContext context, BlocType bloc);
 
 class BlocCreatorBag {
   VoidCallback _onDisposed;
@@ -10,11 +16,6 @@ class BlocCreatorBag {
 
   VoidCallback get onDisposed => _onDisposed;
 }
-
-typedef BlocCreator<BlocType extends Bloc> = BlocType Function(
-    BuildContext context, BlocCreatorBag bag);
-typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
-    BuildContext context, BlocType bloc);
 
 class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   final BlocCreator<BlocType> creator;
