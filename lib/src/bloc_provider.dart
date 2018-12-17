@@ -17,6 +17,8 @@ class BlocCreatorBag {
   VoidCallback get onDisposed => _onDisposed;
 }
 
+/// Provides BLoC via this Provider.
+/// BLoC's lifecycle is liked to the state that the provider has internally.
 class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   final BlocCreator<BlocType> creator;
   final BlocBuilder<BlocType> builder;
@@ -40,6 +42,8 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   @override
   _BlocProviderState createState() => _BlocProviderState<BlocType>();
 
+  // Get BLoC from ancestor.
+  // Can be called from initState or later
   static BlocType of<BlocType extends Bloc>(BuildContext context) =>
       _Inherited.of<BlocType>(context);
 }
