@@ -7,7 +7,7 @@ class CartButton extends StatefulWidget {
   final Color badgeColor;
   final Color badgeTextColor;
 
-  CartButton({
+  const CartButton({
     Key key,
     @required this.itemCount,
     this.onPressed,
@@ -50,7 +50,7 @@ class CartButtonState extends State<CartButton>
       icon: Stack(
         overflow: Overflow.visible,
         children: [
-          Icon(Icons.shopping_cart),
+          const Icon(Icons.shopping_cart),
           Positioned(
             top: -8,
             right: -3,

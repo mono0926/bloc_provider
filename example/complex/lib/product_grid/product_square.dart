@@ -8,7 +8,7 @@ class ProductSquare extends StatelessWidget {
   final Product product;
   final GestureTapCallback onTap;
 
-  ProductSquare({
+  const ProductSquare({
     Key key,
     @required this.product,
     this.onTap,

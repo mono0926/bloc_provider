@@ -40,7 +40,7 @@ class ProductGrid extends StatelessWidget {
     final product = slice.elementAt(index);
 
     if (product == null) {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     }
 
     return ProductSquare(

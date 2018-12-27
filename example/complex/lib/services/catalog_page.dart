@@ -10,7 +10,7 @@ class CatalogPage {
 
   final int startIndex;
 
-  CatalogPage(this._products, this.startIndex);
+  const CatalogPage(this._products, this.startIndex);
 
   int get count => _products.length;
 

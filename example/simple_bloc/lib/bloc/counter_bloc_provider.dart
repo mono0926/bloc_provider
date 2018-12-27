@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:simple_bloc/bloc/counter_bloc.dart';
 
 class CounterBlocProvider extends InheritedWidget {
-  CounterBlocProvider({
+  const CounterBlocProvider({
     Key key,
     @required Widget child,
     @required this.bloc,

@@ -12,7 +12,7 @@ class CartAddition {
   final Product product;
   final int count;
 
-  CartAddition(this.product, {this.count = 1});
+  const CartAddition(this.product, {this.count = 1});
 }
 
 @immutable

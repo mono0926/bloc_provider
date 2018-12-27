@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 class ServiceProvider extends InheritedWidget {
   final CatalogService catalogService;
 
-  ServiceProvider({
+  const ServiceProvider({
     @required this.catalogService,
     @required Widget child,
   }) : super(child: child);

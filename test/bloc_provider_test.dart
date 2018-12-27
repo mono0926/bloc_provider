@@ -64,7 +64,8 @@ void main() {
   });
 }
 
-_performCounterTest(WidgetTester tester, Widget app, CounterBloc bloc) async {
+Future<void> _performCounterTest(
+    WidgetTester tester, Widget app, CounterBloc bloc) async {
   await tester.pumpWidget(app);
 
   expect(find.text('0'), findsOneWidget);

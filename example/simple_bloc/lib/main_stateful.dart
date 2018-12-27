@@ -21,7 +21,7 @@ class AppState extends State<App> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () => setState(() => count++),
         ),
       ),

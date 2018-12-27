@@ -25,7 +25,7 @@ class _PositionedTilesState extends State<PositionedTiles> {
 //      StatefulTile(title: 'B'),
 //    ];
     // Works well
-    tiles = [
+    tiles = const [
       StatefulTile(title: 'A', key: Key('A')),
       StatefulTile(title: 'B', key: Key('B')),
     ];
@@ -54,7 +54,7 @@ class _PositionedTilesState extends State<PositionedTiles> {
             tiles.insert(1, tiles.removeAt(0));
           });
         },
-        child: Icon(Icons.sentiment_very_satisfied),
+        child: const Icon(Icons.sentiment_very_satisfied),
       ),
     );
   }
@@ -69,7 +69,7 @@ class StatelessTile extends StatelessWidget {
     return Container(
       child: Text(title),
       height: 44,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
     );
   }
 
@@ -101,13 +101,13 @@ class StatefulTileState extends State<StatefulTile> {
     return Container(
       child: Text(title),
       height: 44,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
     );
   }
 
   @override
   void dispose() {
-    print('disposed: ${title}');
+    print('disposed: $title');
     super.dispose();
   }
 }
@@ -127,7 +127,7 @@ class BlocTile extends StatelessWidget {
         return Container(
           child: Text(bloc.title),
           height: 44,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
         );
       },
     );

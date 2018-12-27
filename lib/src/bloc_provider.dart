@@ -33,7 +33,7 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
           creator: creator,
         );
 
-  BlocProvider.builder({
+  const BlocProvider.builder({
     Key key,
     @required this.builder,
     @required this.creator,
@@ -81,7 +81,7 @@ class _BlocProviderState<BlocType extends Bloc>
 class _Inherited<BlocType extends Bloc> extends InheritedWidget {
   final BlocType bloc;
 
-  _Inherited({
+  const _Inherited({
     @required this.bloc,
     @required Widget child,
   }) : super(child: child);

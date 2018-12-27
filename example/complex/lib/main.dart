@@ -27,7 +27,7 @@ class App extends StatelessWidget {
           title: 'Bloc Complex',
           theme: appTheme,
           home: MyHomePage(),
-          routes: {BlocCartPage.routeName: (context) => BlocCartPage()},
+          routes: {BlocCartPage.routeName: (context) => const BlocCartPage()},
         ),
       ),
     );
@@ -40,7 +40,7 @@ class MyHomePage extends StatelessWidget {
     final cartBloc = CartProvider.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bloc Complex'),
+        title: const Text('Bloc Complex'),
         actions: <Widget>[
           StreamBuilder<int>(
             stream: cartBloc.itemCount,

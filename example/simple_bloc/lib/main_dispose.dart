@@ -50,7 +50,7 @@ class App extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () => bloc.increment.add(null),
         ),
       ),

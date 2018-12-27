@@ -4,7 +4,7 @@ import 'package:bloc_complex/widgets/cart_page.dart';
 import 'package:flutter/material.dart';
 
 class BlocCartPage extends StatelessWidget {
-  BlocCartPage();
+  const BlocCartPage();
 
   static const routeName = '/cart';
 
@@ -13,7 +13,7 @@ class BlocCartPage extends StatelessWidget {
     final cart = CartProvider.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Cart'),
+        title: const Text('Your Cart'),
       ),
       body: StreamBuilder<List<CartItem>>(
         stream: cart.items,

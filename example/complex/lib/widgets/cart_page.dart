@@ -4,7 +4,7 @@ import 'package:bloc_complex/utils/is_dark.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatelessWidget {
-  CartPage(this.cart);
+  const CartPage(this.cart);
   final Cart cart;
 
   static const routeName = '/cart';
@@ -13,7 +13,7 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Cart'),
+        title: const Text('Your Cart'),
       ),
       body: cart.items.isEmpty
           ? Center(
@@ -27,7 +27,7 @@ class CartPage extends StatelessWidget {
 }
 
 class ItemTile extends StatelessWidget {
-  ItemTile({this.item});
+  const ItemTile({this.item});
   final CartItem item;
 
   @override
