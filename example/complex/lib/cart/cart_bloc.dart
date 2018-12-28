@@ -17,7 +17,7 @@ class CartAddition {
 
 @immutable
 class CartBloc implements Bloc {
-  final _cart = CartService();
+  static const _cart = CartService();
 
   final _items = BehaviorSubject<List<CartItem>>(seedValue: []);
   final _itemCount = BehaviorSubject<int>(seedValue: 0);

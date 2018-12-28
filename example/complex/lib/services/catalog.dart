@@ -10,8 +10,9 @@ import 'catalog_page.dart';
 @immutable
 class CatalogService {
   static int productsPerPage = 10;
-
   static int networkDelay = 500;
+
+  const CatalogService();
 
   Future<CatalogPage> requestPage(int offset) async {
     // Simulate network delay.

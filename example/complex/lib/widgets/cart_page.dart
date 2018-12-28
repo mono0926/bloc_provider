@@ -4,10 +4,10 @@ import 'package:bloc_complex/utils/is_dark.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage(this.cart);
-  final Cart cart;
-
   static const routeName = '/cart';
+
+  final Cart cart;
+  const CartPage(this.cart);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class CartPage extends StatelessWidget {
 }
 
 class ItemTile extends StatelessWidget {
-  const ItemTile({this.item});
   final CartItem item;
+  const ItemTile({this.item});
 
   @override
   Widget build(BuildContext context) {

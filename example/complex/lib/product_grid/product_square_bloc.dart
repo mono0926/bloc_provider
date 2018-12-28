@@ -9,7 +9,6 @@ import 'package:rxdart/rxdart.dart';
 @immutable
 class ProductSquareBloc implements Bloc {
   final _isInCartSubject = BehaviorSubject<bool>(seedValue: false);
-
   final _cartItemsController = StreamController<List<CartItem>>();
 
   ProductSquareBloc(Product product) {

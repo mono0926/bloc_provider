@@ -8,9 +8,9 @@ import '../models/product.dart';
 
 @immutable
 class CartService {
-  final List<CartItem> _items = <CartItem>[];
+  static const List<CartItem> _items = <CartItem>[];
 
-  CartService();
+  const CartService();
 
   int get itemCount => _items.fold(0, (sum, el) => sum + el.count);
 

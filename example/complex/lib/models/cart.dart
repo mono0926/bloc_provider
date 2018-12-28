@@ -6,7 +6,9 @@ import 'cart_item.dart';
 
 @immutable
 class Cart {
-  final List<CartItem> _items = <CartItem>[];
+  static const List<CartItem> _items = <CartItem>[];
+
+  const Cart();
 
   UnmodifiableListView<CartItem> get items => UnmodifiableListView(_items);
 

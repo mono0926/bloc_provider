@@ -11,7 +11,7 @@ import 'services/catalog.dart';
 
 void main() {
   runApp(
-    ServiceProvider(
+    const ServiceProvider(
       catalogService: CatalogService(),
       child: App(),
     ),
@@ -19,6 +19,7 @@ void main() {
 }
 
 class App extends StatelessWidget {
+  const App();
   @override
   Widget build(BuildContext context) {
     return CatalogProvider(
@@ -26,8 +27,10 @@ class App extends StatelessWidget {
         child: MaterialApp(
           title: 'Bloc Complex',
           theme: appTheme,
-          home: MyHomePage(),
-          routes: {BlocCartPage.routeName: (context) => const BlocCartPage()},
+          home: const MyHomePage(),
+          routes: {
+            BlocCartPage.routeName: (context) => const BlocCartPage(),
+          },
         ),
       ),
     );
@@ -35,6 +38,7 @@ class App extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage();
   @override
   Widget build(BuildContext context) {
     final cartBloc = CartProvider.of(context);
@@ -54,7 +58,7 @@ class MyHomePage extends StatelessWidget {
           )
         ],
       ),
-      body: ProductGrid(),
+      body: const ProductGrid(),
     );
   }
 }

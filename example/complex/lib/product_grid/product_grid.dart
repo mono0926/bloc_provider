@@ -8,9 +8,10 @@ import 'package:flutter/material.dart';
 
 class ProductGrid extends StatelessWidget {
   static const _loadingSpace = 40;
-
   static const _gridDelegate =
       SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2);
+
+  const ProductGrid();
 
   @override
   Widget build(BuildContext context) {
