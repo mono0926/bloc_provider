@@ -8,7 +8,7 @@ import '../models/product.dart';
 
 @immutable
 class CartService {
-  static const List<CartItem> _items = [];
+  static final List<CartItem> _items = [];
 
   const CartService();
 
