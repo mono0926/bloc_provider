@@ -1,3 +1,8 @@
+## 0.4.0
+
+- Change to `BlocProvider.fromBloc` from `BlocProvider.unmanaged`
+- Add `BlocProvider.fromBlocContext` constructor
+
 ## 0.3.0
 
 - Add `BlocProvider.unmanaged` constructor

@@ -87,30 +87,58 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
 
   /// Pass the bloc which is managed by other widget.
   ///
-  /// Passed bloc isn't disposed, so it should be managed appropriately.
+  /// Passed bloc won't be disposed automatically,
+  /// so it should be managed appropriately.
   ///
   /// Typical use case is this:
   ///
   /// 1. The bloc is managed by [BlocProvider] or [BlocProvider.builder]
   /// 2. Pass the bloc to other widgets tree without dispose management
   ///
+  /// See also [BlocProvider.fromBlocContext]
+  ///
   /// ### Example
   ///
   /// ```
-  /// BlocProvider<CounterBloc>(
+  /// BlocProvider<CounterBloc>.fromBloc(
   ///   bloc: BlocProvider<CounterBloc>.of(context),
   ///   child: AnotherPage(),
   /// )
   /// ```
-  BlocProvider.unmanaged({
+  BlocProvider.fromBloc({
     Key key,
     @required BlocType bloc,
     @required Widget child,
-  }) : this.builder(
+  }) : this(
           key: key,
           creator: (_context, _bag) => bloc,
-          builder: (_context, _bloc) => child,
+          child: child,
           autoDispose: false,
+        );
+
+  /// Pass the context that contains bloc which is managed by other widget.
+  ///
+  /// Passed blocContext's bloc won't disposed automatically,
+  /// so it should be managed appropriately.
+  ///
+  /// See also [BlocProvider.fromBloc]
+  ///
+  /// ### Example
+  ///
+  /// ```
+  /// BlocProvider<CounterBloc>.fromBlocContext(
+  ///   context: context, // context's widget tree should contains the bloc
+  ///   child: AnotherPage(),
+  /// )
+  /// ```
+  BlocProvider.fromBlocContext({
+    Key key,
+    @required BuildContext context,
+    @required Widget child,
+  }) : this.fromBloc(
+          key: key,
+          bloc: BlocProvider.of(context),
+          child: child,
         );
 
   @override
