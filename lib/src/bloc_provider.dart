@@ -16,7 +16,9 @@ typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
 /// This can be called directory(see constructor documentation),
 /// or you can define a class as below.
 ///
-/// {@tool sample}
+/// ### Example
+///
+/// ```dart
 /// class CounterBlocProvider extends BlocProvider<CounterBloc> {
 ///   CounterBlocProvider({
 ///     @required Widget child,
@@ -30,21 +32,21 @@ typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
 ///
 ///   static CounterBloc of(BuildContext context) => BlocProvider.of(context);
 /// }
-/// {@end-tool}
+/// ```
 class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   final BlocCreator<BlocType> creator;
   final BlocBuilder<BlocType> builder;
 
   /// Constructor for simple usage.
   ///
-  /// {@tool sample}
+  /// ### Example
+  ///
   /// ```dart
   /// BlocProvider<CounterBloc>(
   ///   creator: (_context, _bag) => CounterBloc(),
   ///   child: App(),
   /// )
   /// ```
-  /// {@end-tool}
   BlocProvider({
     Key key,
     @required BlocCreator<BlocType> creator,
@@ -57,7 +59,8 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
 
   /// Constructor for advanced usage.
   ///
-  /// {@tool sample}
+  /// ### Example
+  ///
   /// ```dart
   /// BlocProvider<CounterBloc>(
   ///   creator: (context, bag) {
@@ -72,7 +75,6 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   ///   },
   /// )
   /// ```
-  /// {@end-tool}
   const BlocProvider.builder({
     Key key,
     @required this.creator,
@@ -84,8 +86,8 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
 
   /// Return the [BlocType] of the closest ancestor [_Inherited].
   ///
-  /// Simple usage:
-  /// {@tool sample}
+  /// ###  Simple usage
+  ///
   /// ```dart
   /// @override
   /// Widget build(BuildContext context) {
@@ -94,8 +96,9 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   /// }
   /// ```
   ///
-  /// You can also define your own [of] method for convenience:
-  /// {@tool sample}
+  /// ### You can also define your own [of] method for convenience:
+  ///
+  /// ```
   /// // Define of method at subclass.
   /// class CounterBlocProvider extends BlocProvider<CounterBloc> {
   ///   // ...
@@ -104,7 +107,7 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   ///
   /// // Call defined [of].
   /// final bloc = CounterBloc.of(context);
-  /// {@end-tool}
+  /// ```
   static BlocType of<BlocType extends Bloc>(BuildContext context) =>
       _Inherited.of<BlocType>(context);
 }

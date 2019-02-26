@@ -2,7 +2,8 @@
 ///
 /// When defining some BLoC, it should implements this.
 ///
-/// {@tool sample}
+/// ### Example
+///
 /// ```dart
 /// class CounterBloc {
 ///   final _countController = BehaviorSubject<int>(seedValue: 0);
@@ -24,7 +25,6 @@
 ///   }
 /// }
 /// ```
-/// {@end-tool}
 abstract class Bloc {
   void dispose();
 }
