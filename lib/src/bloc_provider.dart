@@ -36,6 +36,7 @@ typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
 class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   final BlocCreator<BlocType> creator;
   final BlocBuilder<BlocType> builder;
+  final bool autoDispose;
 
   /// Constructor for simple usage.
   ///
@@ -79,7 +80,36 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
     Key key,
     @required this.creator,
     @required this.builder,
+    this.autoDispose = true,
   }) : super(key: key);
+
+  /// Pass the bloc which is managed by other widget.
+  ///
+  /// Passed bloc isn't disposed, so it should be managed appropriately.
+  ///
+  /// Typical use case is this:
+  ///
+  /// 1. The bloc is managed by [BlocProvider] or [BlocProvider.builder]
+  /// 2. Pass the bloc to other widgets tree without dispose management
+  ///
+  /// ### Example
+  ///
+  /// ```
+  /// BlocProvider<CounterBloc>(
+  ///   bloc: BlocProvider<CounterBloc>.of(context),
+  ///   child: AnotherPage(),
+  /// )
+  /// ```
+  BlocProvider.unmanaged({
+    Key key,
+    @required BlocType bloc,
+    @required Widget child,
+  }) : this.builder(
+          key: key,
+          creator: (_context, _bag) => bloc,
+          builder: (_context, _bloc) => child,
+          autoDispose: false,
+        );
 
   @override
   _BlocProviderState createState() => _BlocProviderState<BlocType>();
@@ -133,7 +163,9 @@ class _BlocProviderState<BlocType extends Bloc>
 
   @override
   void dispose() {
-    _bloc.dispose();
+    if (widget.autoDispose) {
+      _bloc.dispose();
+    }
     if (_bag.onDisposed != null) {
       _bag.onDisposed();
     }
