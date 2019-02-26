@@ -1,49 +1,110 @@
 import 'package:flutter/widgets.dart';
 
 import 'bloc.dart';
+import 'bloc_creator_bag.dart';
 
 typedef BlocCreator<BlocType extends Bloc> = BlocType Function(
     BuildContext context, BlocCreatorBag bag);
 typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
     BuildContext context, BlocType bloc);
 
-class BlocCreatorBag {
-  VoidCallback _onDisposed;
-  // ignore: use_setters_to_change_properties
-  void register({VoidCallback onDisposed}) {
-    _onDisposed = onDisposed;
-  }
-
-  VoidCallback get onDisposed => _onDisposed;
-}
-
 /// Provides BLoC via this Provider.
-/// BLoC's lifecycle is liked to the state that the provider has internally.
+///
+/// BLoC's lifecycle is associated with
+/// the state that the provider has internally.
+///
+/// This can be called directory(see constructor documentation),
+/// or you can define a class as below.
+///
+/// {@tool sample}
+/// class CounterBlocProvider extends BlocProvider<CounterBloc> {
+///   CounterBlocProvider({
+///     @required Widget child,
+///   }) : super(
+///     child: child,
+///     creator: (context, _bag) {
+///       assert(context != null);
+///       return CounterBloc();
+///     },
+///   );
+///
+///   static CounterBloc of(BuildContext context) => BlocProvider.of(context);
+/// }
+/// {@end-tool}
 class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   final BlocCreator<BlocType> creator;
   final BlocBuilder<BlocType> builder;
 
+  /// Constructor for simple usage.
+  ///
+  /// {@tool sample}
+  /// ```dart
+  /// BlocProvider<CounterBloc>(
+  ///   creator: (_context, _bag) => CounterBloc(),
+  ///   child: App(),
+  /// )
+  /// ```
+  /// {@end-tool}
   BlocProvider({
     Key key,
-    @required Widget child,
     @required BlocCreator<BlocType> creator,
+    @required Widget child,
   }) : this.builder(
           key: key,
-          builder: (_context, _bloc) => child,
           creator: creator,
+          builder: (_context, _bloc) => child,
         );
 
+  /// Constructor for advanced usage.
+  ///
+  /// {@tool sample}
+  /// ```dart
+  /// BlocProvider<CounterBloc>(
+  ///   creator: (context, bag) {
+  ///     // Do some work with `context` and `bag`.
+  ///     // ...
+  ///     return CounterBloc();
+  ///   },
+  ///   builder: (context, bloc) {
+  ///     // Do some work with `context` and `bloc`.
+  ///     // ...
+  ///     return App();
+  ///   },
+  /// )
+  /// ```
+  /// {@end-tool}
   const BlocProvider.builder({
     Key key,
-    @required this.builder,
     @required this.creator,
+    @required this.builder,
   }) : super(key: key);
 
   @override
   _BlocProviderState createState() => _BlocProviderState<BlocType>();
 
-  // Get BLoC from ancestor.
-  // Can be called from initState or later
+  /// Return the [BlocType] of the closest ancestor [_Inherited].
+  ///
+  /// Simple usage:
+  /// {@tool sample}
+  /// ```dart
+  /// @override
+  /// Widget build(BuildContext context) {
+  ///   final bloc = BlocProvider.of<CounterBloc>(context);
+  ///   // ...
+  /// }
+  /// ```
+  ///
+  /// You can also define your own [of] method for convenience:
+  /// {@tool sample}
+  /// // Define of method at subclass.
+  /// class CounterBlocProvider extends BlocProvider<CounterBloc> {
+  ///   // ...
+  ///   static CounterBloc of(BuildContext context) => BlocProvider.of(context);
+  /// }
+  ///
+  /// // Call defined [of].
+  /// final bloc = CounterBloc.of(context);
+  /// {@end-tool}
   static BlocType of<BlocType extends Bloc>(BuildContext context) =>
       _Inherited.of<BlocType>(context);
 }
