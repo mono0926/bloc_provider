@@ -66,7 +66,7 @@ class App extends StatelessWidget {
 }
 ```
 
-- Computational complexity of `of` method, which is used for access the bloc is `O(1)`.
+- Computational complexity of `of` method, which is used for accessing the bloc is `O(1)`.
     - `of` method can be also called at [State](https://docs.flutter.io/flutter/widgets/State-class.html)'s [initState](https://docs.flutter.io/flutter/widgets/State/initState.html).
 - Provided bloc will be disposed when the inner state is disposed 👍
 
