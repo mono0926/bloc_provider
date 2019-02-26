@@ -1,4 +1,4 @@
-/// BLoC base class.
+/// BLoC(Business Logic Component) base class.
 ///
 /// When defining some BLoC, it should implements this.
 ///

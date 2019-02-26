@@ -1,6 +1,6 @@
 # bloc_provider
 
-Provides bloc to descendant widget (O(1)), and the bloc is disposed appropriately by the state which the bloc_provider holds internally.
+Provides BLoC(Business Logic Component) to descendant widget (O(1)), and the bloc is disposed automatically by the state which the bloc_provider holds internally.
 
 ## Usage
 
