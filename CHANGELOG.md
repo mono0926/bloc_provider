@@ -1,3 +1,8 @@
+## 0.5.0
+
+- Add BlocProviderTree Widget (#4, #5)
+  - Converts the BlocProvider list into a tree of nested BlocProvider widgets.
+
 ## 0.4.0
 
 - Change to `BlocProvider.fromBloc` from `BlocProvider.unmanaged`
