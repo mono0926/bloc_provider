@@ -33,9 +33,9 @@ typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
 ///   static CounterBloc of(BuildContext context) => BlocProvider.of(context);
 /// }
 /// ```
-class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
-  final BlocCreator<BlocType> creator;
-  final BlocBuilder<BlocType> builder;
+class BlocProvider<T extends Bloc> extends StatefulWidget {
+  final BlocCreator<T> creator;
+  final BlocBuilder<T> builder;
   final bool autoDispose;
 
   /// Constructor for simple usage.
@@ -50,7 +50,7 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   /// ```
   BlocProvider({
     Key key,
-    @required BlocCreator<BlocType> creator,
+    @required BlocCreator<T> creator,
     @required Widget child,
     bool autoDispose = true,
   }) : this.builder(
@@ -107,7 +107,7 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   /// ```
   BlocProvider.fromBloc({
     Key key,
-    @required BlocType bloc,
+    @required T bloc,
     @required Widget child,
   }) : this(
           key: key,
@@ -142,7 +142,7 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
         );
 
   @override
-  _BlocProviderState createState() => _BlocProviderState<BlocType>();
+  _BlocProviderState createState() => _BlocProviderState<T>();
 
   /// Return the [BlocType] of the closest ancestor [_Inherited].
   ///
