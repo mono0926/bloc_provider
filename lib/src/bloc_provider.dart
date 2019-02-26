@@ -40,6 +40,9 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
 
   /// Constructor for simple usage.
   ///
+  /// [child] parameter should be omitted if and only if
+  /// the provider is passed to [BlocProviderTree]. // ignore: comment_references
+  ///
   /// ### Example
   ///
   /// ```dart
@@ -51,7 +54,7 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   BlocProvider({
     Key key,
     @required BlocCreator<T> creator,
-    @required Widget child,
+    Widget child,
     bool autoDispose = true,
   }) : this.builder(
           key: key,
@@ -140,6 +143,17 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
           bloc: BlocProvider.of(context),
           child: child,
         );
+
+  /// Clone the current [BlocProvider] with a new child [Widget].
+  ///
+  /// All other values, including [Key] and [Bloc] are preserved.
+  BlocProvider<T> copyWith(Widget child) {
+    return BlocProvider<T>.builder(
+      key: key,
+      creator: creator,
+      builder: (_context, _bag) => child,
+    );
+  }
 
   @override
   _BlocProviderState createState() => _BlocProviderState<T>();
