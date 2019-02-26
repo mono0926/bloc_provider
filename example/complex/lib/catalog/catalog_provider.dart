@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 @immutable
 class CatalogProvider extends BlocProvider<CatalogBloc> {
   CatalogProvider({
-    @required Widget child,
+    Widget child,
   }) : super(
           creator: (context, _bag) {
             final provider = ServiceProvider.of(context);
