@@ -62,7 +62,7 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
   /// ### Example
   ///
   /// ```dart
-  /// BlocProvider<CounterBloc>(
+  /// BlocProvider.builder<CounterBloc>(
   ///   creator: (context, bag) {
   ///     // Do some work with `context` and `bag`.
   ///     // ...
