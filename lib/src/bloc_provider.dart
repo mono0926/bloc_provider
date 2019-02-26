@@ -52,10 +52,12 @@ class BlocProvider<BlocType extends Bloc> extends StatefulWidget {
     Key key,
     @required BlocCreator<BlocType> creator,
     @required Widget child,
+    bool autoDispose = true,
   }) : this.builder(
           key: key,
           creator: creator,
           builder: (_context, _bloc) => child,
+          autoDispose: autoDispose,
         );
 
   /// Constructor for advanced usage.
