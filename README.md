@@ -7,7 +7,7 @@ Provides bloc to descendant widget (O(1)), and the bloc is disposed appropriatel
 #### 1. Define some BLoC like this:
 
 ```dart
-class CounterBloc {
+class CounterBloc implements Bloc {
   final _countController = BehaviorSubject<int>(seedValue: 0);
   final _incrementController = PublishSubject<void>();
 

@@ -5,7 +5,7 @@
 /// ### Example
 ///
 /// ```dart
-/// class CounterBloc {
+/// class CounterBloc implements Bloc {
 ///   final _countController = BehaviorSubject<int>(seedValue: 0);
 ///   final _incrementController = PublishSubject<void>();
 ///
