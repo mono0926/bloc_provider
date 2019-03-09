@@ -56,7 +56,7 @@ class BlocProviderTree extends StatelessWidget {
   final List<BlocProvider> blocProviders;
 
   /// The [Widget] and its descendants which will have access to
-  /// every [BloC] provided by [blocProviders].
+  /// every `BloC` provided by [blocProviders].
   ///
   /// This [Widget] will be a direct descendent of
   /// the last [BlocProvider] in [blocProviders].

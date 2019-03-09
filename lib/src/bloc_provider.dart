@@ -41,7 +41,7 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   /// Constructor for simple usage.
   ///
   /// The [child] parameter should be omitted if and only if
-  /// the provider is passed to [BlocProviderTree].
+  /// the provider is passed to `BlocProviderTree`.
   ///
   /// ### Example
   ///
