@@ -11,3 +11,4 @@ ios/Flutter/Generated.xcconfig
 ios/Runner/GeneratedPluginRegistrant.*
 /lib/generated
 /res
+/.history
