@@ -19,8 +19,8 @@ class CartAddition {
 class CartBloc implements Bloc {
   static const _cart = CartService();
 
-  final _items = BehaviorSubject<List<CartItem>>(seedValue: []);
-  final _itemCount = BehaviorSubject<int>(seedValue: 0);
+  final _items = BehaviorSubject<List<CartItem>>.seeded([]);
+  final _itemCount = BehaviorSubject<int>.seeded(0);
   final _cartAdditionController = StreamController<CartAddition>();
 
   CartBloc() {
@@ -30,7 +30,7 @@ class CartBloc implements Bloc {
   Sink<CartAddition> get cartAddition => _cartAdditionController.sink;
 
   ValueObservable<int> get itemCount =>
-      _itemCount.distinct().shareValue(seedValue: 0);
+      _itemCount.distinct().shareValueSeeded(0);
 
   ValueObservable<List<CartItem>> get items => _items.stream;
 

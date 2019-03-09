@@ -1,7 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 
 class CounterBloc {
-  final _countController = BehaviorSubject<int>(seedValue: 0);
+  final _countController = BehaviorSubject<int>.seeded(0);
   final _incrementController = PublishSubject<void>();
 
   CounterBloc() {

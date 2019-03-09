@@ -13,10 +13,10 @@ class CatalogBloc implements Bloc {
 
   final _pages = <int, CatalogPage>{};
 
-  final _pagesBeingRequested = Set<int>();
+  final _pagesBeingRequested = <int>{};
 
   final _sliceSubject =
-      BehaviorSubject<CatalogSlice>(seedValue: const CatalogSlice.empty());
+      BehaviorSubject<CatalogSlice>.seeded(const CatalogSlice.empty());
 
   final CatalogService catalogService;
 

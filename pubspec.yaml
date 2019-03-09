@@ -6,12 +6,12 @@ version: 0.5.0+2
 author: Masayuki Ono <mono0926@gmail.com>
 homepage: https://github.com/mono0926/bloc_provider
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: '>=2.0.0-dev.68.0 <3.0.0'
 dependencies:
   flutter:
     sdk: flutter
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  rxdart:
+  rxdart: any
 flutter:
