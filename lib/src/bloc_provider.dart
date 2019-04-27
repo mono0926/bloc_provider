@@ -228,11 +228,16 @@ class _Inherited<BlocType extends Bloc> extends InheritedWidget {
 
   static BlocType of<BlocType extends Bloc>(BuildContext context) {
     Type typeOf<T>() => T;
-    return (context
-            .ancestorInheritedElementForWidgetOfExactType(
-                typeOf<_Inherited<BlocType>>())
-            .widget as _Inherited<BlocType>)
-        .bloc;
+    final widget = context
+        .ancestorInheritedElementForWidgetOfExactType(
+            typeOf<_Inherited<BlocType>>())
+        .widget as _Inherited<BlocType>;
+    if (widget == null) {
+      throw ArgumentError(
+          // ignore: lines_longer_than_80_chars
+          '$BlocType is not provided to ${context.widget.runtimeType}. Context used for Bloc retrieval must be a descendant of BlocProvider.');
+    }
+    return widget.bloc;
   }
 
   @override
