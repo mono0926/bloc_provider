@@ -1,3 +1,8 @@
+## 0.6.0
+
+- Add readable missing BlocProvider error.(#9)
+- Make it possible to use BlocProvider.builder's context to retrieve a Bloc provided in creator.(#10)
+
 ## 0.5.0
 
 - Add BlocProviderTree Widget (#4, #5)
