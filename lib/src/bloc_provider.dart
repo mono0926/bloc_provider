@@ -236,8 +236,9 @@ class _Inherited<BlocType extends Bloc> extends InheritedWidget {
         .widget as _Inherited<BlocType>;
     if (widget == null) {
       throw ArgumentError(
-          // ignore: lines_longer_than_80_chars
-          '$BlocType is not provided to ${context.widget.runtimeType}. Context used for Bloc retrieval must be a descendant of BlocProvider.');
+        '$BlocType is not provided to ${context.widget.runtimeType}. '
+        'Context used for Bloc retrieval must be a descendant of BlocProvider.',
+      );
     }
     return widget.bloc;
   }
