@@ -2,6 +2,9 @@
 
 Provides BLoC(Business Logic Component) to descendant widget (O(1)), and the bloc is disposed automatically by the state which the bloc_provider holds internally.
 
+[![Codemagic build status](https://api.codemagic.io/apps/5c07297ae5d85c000decbd7a/5c0b461ee3b238001782269a/status_badge.svg)](https://codemagic.io/apps/5c07297ae5d85c000decbd7a/5c0b461ee3b238001782269a/latest_build)
+
+
 ## Usage
 
 #### 1. Define some BLoC like this:
