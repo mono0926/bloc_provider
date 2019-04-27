@@ -201,7 +201,9 @@ class _BlocProviderState<BlocType extends Bloc>
   Widget build(BuildContext context) {
     return _Inherited<BlocType>(
       bloc: _bloc,
-      child: widget.builder(context, _bloc),
+      child: Builder(
+        builder: (context) => widget.builder(context, _bloc),
+      ),
     );
   }
 
