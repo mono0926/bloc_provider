@@ -233,7 +233,7 @@ class _Inherited<BlocType extends Bloc> extends InheritedWidget {
     final widget = context
         .ancestorInheritedElementForWidgetOfExactType(
             typeOf<_Inherited<BlocType>>())
-        .widget as _Inherited<BlocType>;
+        ?.widget as _Inherited<BlocType>;
     if (widget == null) {
       throw ArgumentError(
         '$BlocType is not provided to ${context.widget.runtimeType}. '

@@ -1,3 +1,8 @@
+## 0.6.1
+
+- Enhance error handling when `ancestorInheritedElementForWidgetOfExactType`
+is null
+
 ## 0.6.0
 
 - Add readable missing BlocProvider error.(#9)
