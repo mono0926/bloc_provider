@@ -160,6 +160,9 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
 
   /// Return the [BlocType] of the closest ancestor [_Inherited].
   ///
+  /// If closest ancestor [_Inherited] is not found, [ArgumentError] will be
+  /// thrown. To suppress the error, you should set [allowNull] to true,
+  ///
   /// ###  Simple usage
   ///
   /// ```dart
@@ -182,8 +185,14 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   /// // Call defined [of].
   /// final bloc = CounterBloc.of(context);
   /// ```
-  static BlocType of<BlocType extends Bloc>(BuildContext context) =>
-      _Inherited.of<BlocType>(context);
+  static BlocType of<BlocType extends Bloc>(
+    BuildContext context, {
+    bool allowNull = false,
+  }) =>
+      _Inherited.of<BlocType>(
+        context,
+        allowNull: allowNull,
+      );
 }
 
 class _BlocProviderState<BlocType extends Bloc>
@@ -228,19 +237,22 @@ class _Inherited<BlocType extends Bloc> extends InheritedWidget {
     @required Widget child,
   }) : super(child: child);
 
-  static BlocType of<BlocType extends Bloc>(BuildContext context) {
+  static BlocType of<BlocType extends Bloc>(
+    BuildContext context, {
+    @required bool allowNull,
+  }) {
     Type typeOf<T>() => T;
     final widget = context
         .ancestorInheritedElementForWidgetOfExactType(
             typeOf<_Inherited<BlocType>>())
         ?.widget as _Inherited<BlocType>;
-    if (widget == null) {
+    if (widget == null && !allowNull) {
       throw ArgumentError(
         '$BlocType is not provided to ${context.widget.runtimeType}. '
         'Context used for Bloc retrieval must be a descendant of BlocProvider.',
       );
     }
-    return widget.bloc;
+    return widget?.bloc;
   }
 
   @override
