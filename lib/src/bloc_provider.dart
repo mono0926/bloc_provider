@@ -34,10 +34,6 @@ typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
 /// }
 /// ```
 class BlocProvider<T extends Bloc> extends StatefulWidget {
-  final BlocCreator<T> creator;
-  final BlocBuilder<T> builder;
-  final bool autoDispose;
-
   /// Constructor for simple usage.
   ///
   /// The [child] parameter should be omitted if and only if
@@ -144,6 +140,10 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
           child: child,
         );
 
+  final BlocCreator<T> creator;
+  final BlocBuilder<T> builder;
+  final bool autoDispose;
+
   /// Clone the current [BlocProvider] with a new child [Widget].
   ///
   /// All other values, including [Key] and [Bloc] are preserved.
@@ -230,8 +230,6 @@ class _BlocProviderState<BlocType extends Bloc>
 
 @immutable
 class _Inherited<BlocType extends Bloc> extends InheritedWidget {
-  final BlocType bloc;
-
   const _Inherited({
     @required this.bloc,
     @required Widget child,
@@ -241,10 +239,8 @@ class _Inherited<BlocType extends Bloc> extends InheritedWidget {
     BuildContext context, {
     @required bool allowNull,
   }) {
-    Type typeOf<T>() => T;
     final widget = context
-        .ancestorInheritedElementForWidgetOfExactType(
-            typeOf<_Inherited<BlocType>>())
+        .getElementForInheritedWidgetOfExactType<_Inherited<BlocType>>()
         ?.widget as _Inherited<BlocType>;
     if (widget == null && !allowNull) {
       throw ArgumentError(
@@ -254,6 +250,8 @@ class _Inherited<BlocType extends Bloc> extends InheritedWidget {
     }
     return widget?.bloc;
   }
+
+  final BlocType bloc;
 
   @override
   bool updateShouldNotify(_Inherited oldWidget) => false;

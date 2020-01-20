@@ -2,10 +2,6 @@ import 'package:bloc_provider/bloc_provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CounterBloc implements Bloc {
-  final _countController = BehaviorSubject<int>.seeded(0);
-  final _incrementController = PublishSubject<void>();
-  var disposed = false;
-
   CounterBloc() {
     _incrementController
         .scan<int>((s, v, i) => s + 1, 0)
@@ -13,11 +9,15 @@ class CounterBloc implements Bloc {
     print('bloc created');
   }
 
-  ValueObservable<int> get count => _countController;
+  final _countController = BehaviorSubject<int>.seeded(0);
+  final _incrementController = PublishSubject<void>();
+  bool disposed = false;
+
+  ValueStream<int> get count => _countController;
   Sink<void> get increment => _incrementController.sink;
 
   @override
-  void dispose() async {
+  Future<void> dispose() async {
     await _incrementController.close();
     await _countController.close();
     disposed = true;

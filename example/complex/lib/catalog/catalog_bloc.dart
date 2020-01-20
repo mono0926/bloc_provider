@@ -24,14 +24,14 @@ class CatalogBloc implements Bloc {
     @required this.catalogService,
   }) {
     _indexController.stream
-        .bufferTime(Duration(milliseconds: 500))
+        .bufferTime(const Duration(milliseconds: 500))
         .where((batch) => batch.isNotEmpty)
         .listen(_handleIndexes);
   }
 
   Sink<int> get index => _indexController.sink;
 
-  ValueObservable<CatalogSlice> get slice => _sliceSubject.stream;
+  ValueStream<CatalogSlice> get slice => _sliceSubject.stream;
 
   int _getPageStartFromIndex(int index) =>
       (index ~/ CatalogService.productsPerPage) *

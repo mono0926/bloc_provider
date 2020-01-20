@@ -19,7 +19,7 @@ class ProductSquareBloc implements Bloc {
 
   Sink<List<CartItem>> get cartItems => _cartItemsController.sink;
 
-  ValueObservable<bool> get isInCart => _isInCartSubject.stream;
+  ValueStream<bool> get isInCart => _isInCartSubject.stream;
 
   @override
   void dispose() {

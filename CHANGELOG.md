@@ -1,3 +1,7 @@
+## 0.7.0
+
+- Update dependencies.
+
 ## 0.6.2
 
 - Add `allowNull` argument, which suppress the error when the provider is not found, to BlocProvider's `of` method.

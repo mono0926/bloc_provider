@@ -44,6 +44,12 @@ import 'bloc_provider.dart';
 /// As a result, the only advantage of using [BlocProviderTree] is improved
 /// readability due to the reduction in nesting and boilerplate.
 class BlocProviderTree extends StatelessWidget {
+  const BlocProviderTree({
+    Key key,
+    @required this.blocProviders,
+    @required this.child,
+  }) : super(key: key);
+
   /// The [BlocProvider] list which is converted into
   /// a tree of [BlocProvider] widgets.
   ///
@@ -61,12 +67,6 @@ class BlocProviderTree extends StatelessWidget {
   /// This [Widget] will be a direct descendent of
   /// the last [BlocProvider] in [blocProviders].
   final Widget child;
-
-  const BlocProviderTree({
-    Key key,
-    @required this.blocProviders,
-    @required this.child,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

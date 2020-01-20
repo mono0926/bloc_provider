@@ -29,10 +29,9 @@ class CartBloc implements Bloc {
 
   Sink<CartAddition> get cartAddition => _cartAdditionController.sink;
 
-  ValueObservable<int> get itemCount =>
-      _itemCount.distinct().shareValueSeeded(0);
+  ValueStream<int> get itemCount => _itemCount.distinct().shareValueSeeded(0);
 
-  ValueObservable<List<CartItem>> get items => _items.stream;
+  ValueStream<List<CartItem>> get items => _items.stream;
 
   void _handleAddition(CartAddition addition) {
     _cart.add(addition.product, addition.count);

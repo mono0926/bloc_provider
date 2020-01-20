@@ -17,7 +17,7 @@ class CounterBloc implements Bloc {
         .pipe(_countController);
   }
 
-  ValueObservable<int> get count => _countController;
+  ValueStream<int> get count => _countController;
   Sink<void> get increment => _incrementController.sink;
 
   @override

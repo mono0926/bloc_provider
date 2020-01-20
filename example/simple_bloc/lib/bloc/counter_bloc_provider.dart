@@ -11,8 +11,7 @@ class CounterBlocProvider extends InheritedWidget {
   final CounterBloc bloc;
 
   static CounterBloc of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(CounterBlocProvider)
-            as CounterBlocProvider)
+    return context.dependOnInheritedWidgetOfExactType<CounterBlocProvider>()
         .bloc;
   }
 

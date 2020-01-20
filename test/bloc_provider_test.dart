@@ -35,10 +35,10 @@ void main() {
       home: BlocProvider<CounterBloc>.builder(
         creator: (context, _bag) => bloc,
         builder: (context, bloc) => StreamBuilder<int>(
-              initialData: bloc.count.value,
-              stream: bloc.count,
-              builder: (context, snap) => Text('${snap.data}'),
-            ),
+          initialData: bloc.count.value,
+          stream: bloc.count,
+          builder: (context, snap) => Text('${snap.data}'),
+        ),
       ),
     );
 
@@ -92,9 +92,9 @@ class StatefulTestWidget extends StatefulWidget {
 
 class _StatefulTestWidgetState extends State<StatefulTestWidget> {
   // shouldn't create bloc outside of creator callback for real app
-  final bloc = CounterBloc();
-  var registeredOnDisposedCalled = false;
-  var _userCounter = true;
+  final CounterBloc bloc = CounterBloc();
+  bool registeredOnDisposedCalled = false;
+  bool _userCounter = true;
   @override
   Widget build(BuildContext context) {
     if (_userCounter) {
@@ -105,10 +105,10 @@ class _StatefulTestWidgetState extends State<StatefulTestWidget> {
             return bloc;
           },
           builder: (context, bloc) => StreamBuilder<int>(
-                initialData: bloc.count.value,
-                stream: bloc.count,
-                builder: (context, snap) => Text('${snap.data}'),
-              ),
+            initialData: bloc.count.value,
+            stream: bloc.count,
+            builder: (context, snap) => Text('${snap.data}'),
+          ),
         ),
       );
     } else {

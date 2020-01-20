@@ -25,9 +25,9 @@ class _PositionedTilesState extends State<PositionedTiles> {
 //      StatefulTile(title: 'B'),
 //    ];
     // Works well
-    tiles = const [
-      StatefulTile(title: 'A', key: Key('A')),
-      StatefulTile(title: 'B', key: Key('B')),
+    tiles = [
+      const StatefulTile(title: 'A', key: Key('A')),
+      const StatefulTile(title: 'B', key: Key('B')),
     ];
 
     // Not work if BlocProvider's key is omitted.
