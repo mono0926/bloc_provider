@@ -3,7 +3,6 @@ description: >-
   Provides bloc to descendant widget (O(1)), and the bloc is disposed appropriately
   by state which the bloc_provider holds internally.
 version: 0.7.0
-author: Masayuki Ono <mono0926@gmail.com>
 homepage: https://github.com/mono0926/bloc_provider
 environment:
   sdk: '>=2.2.0 <3.0.0'
