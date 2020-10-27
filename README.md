@@ -2,6 +2,18 @@
 
 Provides BLoC(Business Logic Component) to descendant widget (O(1)), and the bloc is disposed automatically by the state which the bloc_provider holds internally.
 
+## Recommended other packages
+
+`bloc_provider` was one of the good choice for BLoC pattern until early 2019, but I now recommend to use these instead.
+
+- [provider](https://pub.dev/packages/provider)
+- [disposable_provider](https://pub.dev/packages/disposable_provider)
+  - Thin wrapper of Provider and it calls dispose automatically.
+- [bloc](https://pub.dev/packages/bloc)
+- [riverpod](https://pub.dev/packages/riverpod)
+
+`bloc_provider` will now be minimally maintained.
+
 ## Usage
 
 #### 1. Define some BLoC like this:
