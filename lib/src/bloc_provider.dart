@@ -48,14 +48,14 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   /// )
   /// ```
   BlocProvider({
-    Key key,
-    @required BlocCreator<T> creator,
-    Widget child,
+    Key? key,
+    required BlocCreator<T> creator,
+    Widget? child,
     bool autoDispose = true,
   }) : this.builder(
           key: key,
           creator: creator,
-          builder: (_context, _bloc) => child,
+          builder: (_context, _bloc) => child!,
           autoDispose: autoDispose,
         );
 
@@ -78,9 +78,9 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   /// )
   /// ```
   const BlocProvider.builder({
-    Key key,
-    @required this.creator,
-    @required this.builder,
+    Key? key,
+    required this.creator,
+    required this.builder,
     this.autoDispose = true,
   }) : super(key: key);
 
@@ -105,9 +105,9 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   /// )
   /// ```
   BlocProvider.fromBloc({
-    Key key,
-    @required T bloc,
-    @required Widget child,
+    Key? key,
+    required T bloc,
+    required Widget child,
   }) : this(
           key: key,
           creator: (_context, _bag) => bloc,
@@ -131,9 +131,9 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   /// )
   /// ```
   BlocProvider.fromBlocContext({
-    Key key,
-    @required BuildContext context,
-    @required Widget child,
+    Key? key,
+    required BuildContext context,
+    required Widget child,
   }) : this.fromBloc(
           key: key,
           bloc: BlocProvider.of(context),
@@ -161,7 +161,7 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   /// Return the [BlocType] of the closest ancestor [_Inherited].
   ///
   /// If closest ancestor [_Inherited] is not found, [ArgumentError] will be
-  /// thrown. To suppress the error, you should set [allowNull] to true,
+  /// thrown. To suppress the error, you should use [maybeOf].
   ///
   /// ###  Simple usage
   ///
@@ -185,19 +185,16 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   /// // Call defined [of].
   /// final bloc = CounterBloc.of(context);
   /// ```
-  static BlocType of<BlocType extends Bloc>(
-    BuildContext context, {
-    bool allowNull = false,
-  }) =>
-      _Inherited.of<BlocType>(
-        context,
-        allowNull: allowNull,
-      );
+  static BlocType of<BlocType extends Bloc>(BuildContext context) =>
+      _Inherited.of<BlocType>(context);
+
+  static BlocType? maybeOf<BlocType extends Bloc>(BuildContext context) =>
+      _Inherited.maybeOf<BlocType>(context);
 }
 
 class _BlocProviderState<BlocType extends Bloc>
     extends State<BlocProvider<BlocType>> {
-  BlocType _bloc;
+  late final BlocType _bloc;
   final _bag = BlocCreatorBag();
 
   @override
@@ -221,8 +218,9 @@ class _BlocProviderState<BlocType extends Bloc>
     if (widget.autoDispose) {
       _bloc.dispose();
     }
-    if (_bag.onDisposed != null) {
-      _bag.onDisposed();
+    final onDisposed = _bag.onDisposed;
+    if (onDisposed != null) {
+      onDisposed();
     }
     super.dispose();
   }
@@ -231,24 +229,31 @@ class _BlocProviderState<BlocType extends Bloc>
 @immutable
 class _Inherited<BlocType extends Bloc> extends InheritedWidget {
   const _Inherited({
-    @required this.bloc,
-    @required Widget child,
+    required this.bloc,
+    required Widget child,
   }) : super(child: child);
 
-  static BlocType of<BlocType extends Bloc>(
-    BuildContext context, {
-    @required bool allowNull,
-  }) {
-    final widget = context
-        .getElementForInheritedWidgetOfExactType<_Inherited<BlocType>>()
-        ?.widget as _Inherited<BlocType>;
-    if (widget == null && !allowNull) {
+  static BlocType of<BlocType extends Bloc>(BuildContext context) {
+    final widget = _of<BlocType>(context);
+    if (widget == null) {
       throw ArgumentError(
         '$BlocType is not provided to ${context.widget.runtimeType}. '
         'Context used for Bloc retrieval must be a descendant of BlocProvider.',
       );
     }
+    return widget.bloc;
+  }
+
+  static BlocType? maybeOf<BlocType extends Bloc>(BuildContext context) {
+    final widget = _of<BlocType>(context);
     return widget?.bloc;
+  }
+
+  static _Inherited<BlocType>? _of<BlocType extends Bloc>(
+      BuildContext context) {
+    return context
+        .getElementForInheritedWidgetOfExactType<_Inherited<BlocType>>()
+        ?.widget as _Inherited<BlocType>?;
   }
 
   final BlocType bloc;

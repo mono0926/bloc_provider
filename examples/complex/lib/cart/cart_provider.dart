@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 @immutable
 class CartProvider extends BlocProvider<CartBloc> {
   CartProvider({
-    Widget child,
+    Widget? child,
   }) : super(
           creator: (context, _bag) => CartBloc(),
           child: child,

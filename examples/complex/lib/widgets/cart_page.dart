@@ -17,7 +17,10 @@ class CartPage extends StatelessWidget {
       ),
       body: cart.items.isEmpty
           ? Center(
-              child: Text('Empty', style: Theme.of(context).textTheme.display1),
+              child: Text(
+                'Empty',
+                style: Theme.of(context).textTheme.headline4,
+              ),
             )
           : ListView(
               children: cart.items.map((item) => ItemTile(item: item)).toList(),
@@ -28,7 +31,7 @@ class CartPage extends StatelessWidget {
 
 class ItemTile extends StatelessWidget {
   final CartItem item;
-  const ItemTile({this.item});
+  const ItemTile({required this.item});
 
   @override
   Widget build(BuildContext context) {

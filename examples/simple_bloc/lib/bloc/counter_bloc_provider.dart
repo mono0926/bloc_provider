@@ -1,17 +1,19 @@
 import 'package:flutter/widgets.dart';
-import 'package:simple_bloc/bloc/counter_bloc.dart';
+
+import 'counter_bloc.dart';
 
 class CounterBlocProvider extends InheritedWidget {
   const CounterBlocProvider({
-    Key key,
-    @required Widget child,
-    @required this.bloc,
+    Key? key,
+    required Widget child,
+    required this.bloc,
   }) : super(key: key, child: child);
 
   final CounterBloc bloc;
 
   static CounterBloc of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<CounterBlocProvider>()
+    return context
+        .dependOnInheritedWidgetOfExactType<CounterBlocProvider>()!
         .bloc;
   }
 

@@ -9,7 +9,7 @@ class PositionedTiles extends StatefulWidget {
 }
 
 class _PositionedTilesState extends State<PositionedTiles> {
-  List<Widget> tiles;
+  late final List<Widget> tiles;
 
   @override
   void initState() {
@@ -63,7 +63,10 @@ class _PositionedTilesState extends State<PositionedTiles> {
 class StatelessTile extends StatelessWidget {
   final String title;
 
-  const StatelessTile({Key key, @required this.title}) : super(key: key);
+  const StatelessTile({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -82,7 +85,10 @@ class StatelessTile extends StatelessWidget {
 class StatefulTile extends StatefulWidget {
   final String title;
 
-  const StatefulTile({Key key, @required this.title}) : super(key: key);
+  const StatefulTile({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   @override
   StatefulTileState createState() => StatefulTileState(title: title);
@@ -95,7 +101,7 @@ class StatefulTile extends StatefulWidget {
 class StatefulTileState extends State<StatefulTile> {
   final String title;
 
-  StatefulTileState({@required this.title});
+  StatefulTileState({required this.title});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -115,7 +121,7 @@ class StatefulTileState extends State<StatefulTile> {
 class BlocTile extends StatelessWidget {
   final String title;
 
-  const BlocTile({Key key, @required this.title}) : super(key: key);
+  const BlocTile({Key? key, required this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TitleBloc>.builder(

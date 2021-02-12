@@ -6,7 +6,7 @@ class CounterBloc {
 
   CounterBloc() {
     _incrementController
-        .scan<int>((sum, _v, _i) => sum + 1, 0)
+        .scan<int>((sum, _v, _i) => sum! + 1, 0)
         .pipe(_countController);
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:simple_bloc/bloc/counter_bloc.dart';
-import 'package:simple_bloc/bloc/counter_bloc_provider.dart';
+
+import 'bloc/counter_bloc.dart';
+import 'bloc/counter_bloc_provider.dart';
 
 void main() => runApp(MyStatefulWidget());
 
@@ -10,7 +11,7 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  CounterBloc _bloc;
+  late final CounterBloc _bloc;
 
   @override
   void initState() {
@@ -42,11 +43,11 @@ class App extends StatelessWidget {
         body: Center(
           child: StreamBuilder<int>(
             stream: bloc.count,
-            initialData: bloc.count.value,
+            initialData: bloc.count.valueWrapper?.value,
             builder: (context, snap) => Text(
-                  'count: ${snap.data}',
-                  style: Theme.of(context).textTheme.title,
-                ),
+              'count: ${snap.data}',
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(

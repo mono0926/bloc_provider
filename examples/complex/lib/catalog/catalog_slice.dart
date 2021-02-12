@@ -10,7 +10,7 @@ class CatalogSlice {
 
   final int startIndex;
 
-  final bool hasNext;
+  final bool? hasNext;
 
   CatalogSlice(this._pages, {this.hasNext})
       : startIndex = _pages.map((p) => p.startIndex).fold(0x7FFFFFFF, min);
@@ -23,7 +23,7 @@ class CatalogSlice {
   int get endIndex =>
       startIndex + _pages.map((page) => page.endIndex).fold<int>(-1, max);
 
-  Product elementAt(int index) {
+  Product? elementAt(int index) {
     for (final page in _pages) {
       if (index >= page.startIndex && index <= page.endIndex) {
         return page.products[index - page.startIndex];

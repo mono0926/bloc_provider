@@ -1,11 +1,12 @@
 import 'dart:math' as math;
 
 import 'package:bloc_provider/bloc_provider.dart';
-import 'package:dark_theme_example/bloc/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../bloc/theme_bloc.dart';
+
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -33,11 +34,9 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Transform.rotate(
               angle: math.pi / 6,
-              child: Icon(Icons.brightness_3),
+              child: const Icon(Icons.brightness_3),
             ),
-            onPressed: () {
-              bloc.changeTheme();
-            },
+            onPressed: bloc.changeTheme,
           )
         ],
       ),
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),

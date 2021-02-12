@@ -16,7 +16,7 @@ void main() {
           builder: (context) {
             final bloc = BlocProvider.of<CounterBloc>(context);
             return StreamBuilder<int>(
-              initialData: bloc.count.value,
+              initialData: bloc.count.valueWrapper?.value,
               stream: bloc.count,
               builder: (context, snap) => Text('${snap.data}'),
             );
@@ -35,7 +35,7 @@ void main() {
       home: BlocProvider<CounterBloc>.builder(
         creator: (context, _bag) => bloc,
         builder: (context, bloc) => StreamBuilder<int>(
-          initialData: bloc.count.value,
+          initialData: bloc.count.valueWrapper?.value,
           stream: bloc.count,
           builder: (context, snap) => Text('${snap.data}'),
         ),
@@ -52,15 +52,15 @@ void main() {
     await tester.pumpWidget(app);
 
     expect(find.text('0'), findsOneWidget);
-    expect(key.currentState.bloc.disposed, false);
-    expect(key.currentState.registeredOnDisposedCalled, false);
+    expect(key.currentState!.bloc.disposed, false);
+    expect(key.currentState!.registeredOnDisposedCalled, false);
 
-    key.currentState.removeCounter();
+    key.currentState!.removeCounter();
     await tester.pumpAndSettle();
 
     expect(find.text('0'), findsNothing);
-    expect(key.currentState.bloc.disposed, true);
-    expect(key.currentState.registeredOnDisposedCalled, true);
+    expect(key.currentState!.bloc.disposed, true);
+    expect(key.currentState!.registeredOnDisposedCalled, true);
   });
 }
 
@@ -85,7 +85,7 @@ Future<void> _performCounterTest(
 }
 
 class StatefulTestWidget extends StatefulWidget {
-  const StatefulTestWidget({Key key}) : super(key: key);
+  const StatefulTestWidget({Key? key}) : super(key: key);
   @override
   _StatefulTestWidgetState createState() => _StatefulTestWidgetState();
 }
@@ -105,7 +105,7 @@ class _StatefulTestWidgetState extends State<StatefulTestWidget> {
             return bloc;
           },
           builder: (context, bloc) => StreamBuilder<int>(
-            initialData: bloc.count.value,
+            initialData: bloc.count.valueWrapper?.value,
             stream: bloc.count,
             builder: (context, snap) => Text('${snap.data}'),
           ),

@@ -17,7 +17,7 @@ class AppState extends State<App> {
         body: Center(
           child: Text(
             'count: $count',
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.headline6,
           ),
         ),
         floatingActionButton: FloatingActionButton(

@@ -8,8 +8,8 @@ import 'package:flutter/widgets.dart';
 class ProductSquareProvider extends BlocProvider<ProductSquareBloc> {
   final Product product;
   ProductSquareProvider({
-    @required this.product,
-    @required BlocBuilder<ProductSquareBloc> builder,
+    required this.product,
+    required BlocBuilder<ProductSquareBloc> builder,
   }) : super.builder(
           creator: (context, bag) {
             final cartBloc = CartProvider.of(context);

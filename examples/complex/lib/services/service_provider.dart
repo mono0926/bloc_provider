@@ -6,14 +6,14 @@ class ServiceProvider extends InheritedWidget {
   final CatalogService catalogService;
 
   const ServiceProvider({
-    @required this.catalogService,
-    @required Widget child,
+    required this.catalogService,
+    required Widget child,
   }) : super(child: child);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => false;
 
   static ServiceProvider of(BuildContext context) =>
-      context.getElementForInheritedWidgetOfExactType<ServiceProvider>().widget
+      context.getElementForInheritedWidgetOfExactType<ServiceProvider>()!.widget
           as ServiceProvider;
 }

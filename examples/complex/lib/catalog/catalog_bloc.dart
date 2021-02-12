@@ -21,7 +21,7 @@ class CatalogBloc implements Bloc {
   final CatalogService catalogService;
 
   CatalogBloc({
-    @required this.catalogService,
+    required this.catalogService,
   }) {
     _indexController.stream
         .bufferTime(const Duration(milliseconds: 500))

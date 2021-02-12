@@ -2,15 +2,14 @@ import 'package:bloc_complex/models/product.dart';
 import 'package:bloc_complex/product_grid/product_square_provider.dart';
 import 'package:bloc_complex/utils/is_dark.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 class ProductSquare extends StatelessWidget {
   final Product product;
-  final GestureTapCallback onTap;
+  final GestureTapCallback? onTap;
 
   const ProductSquare({
-    Key key,
-    @required this.product,
+    Key? key,
+    required this.product,
     this.onTap,
   }) : super(key: key);
 
@@ -26,8 +25,8 @@ class ProductSquare extends StatelessWidget {
             child: Center(
               child: StreamBuilder<bool>(
                 stream: bloc.isInCart,
-                initialData: bloc.isInCart.value,
-                builder: (context, snapshot) => _createText(snapshot.data),
+                initialData: bloc.isInCart.valueWrapper?.value,
+                builder: (context, snapshot) => _createText(snapshot.data!),
               ),
             ),
           ),

@@ -1,8 +1,8 @@
 import 'package:bloc_provider/bloc_provider.dart';
-import 'package:dark_theme_example/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'bloc/theme_bloc.dart';
+import 'pages/home_page.dart';
 
 void main() => runApp(BlocProvider<ThemeBloc>(
       creator: (context, bag) => ThemeBloc(),

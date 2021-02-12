@@ -2,7 +2,7 @@ name: bloc_key
 description: A new Flutter application.
 version: 1.0.0+1
 environment:
-  sdk: '>=2.2.0 <3.0.0'
+  sdk: '>=2.12.0-0 <3.0.0'
 dependencies:
   flutter:
     sdk: flutter

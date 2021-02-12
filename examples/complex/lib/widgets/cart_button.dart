@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 class CartButton extends StatefulWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final int itemCount;
   final Color badgeColor;
   final Color badgeTextColor;
 
   const CartButton({
-    Key key,
-    @required this.itemCount,
+    Key? key,
+    required this.itemCount,
     this.onPressed,
     this.badgeColor = Colors.red,
     this.badgeTextColor = Colors.white,
   })  : assert(itemCount >= 0),
-        assert(badgeColor != null),
-        assert(badgeTextColor != null),
         super(key: key);
 
   @override
@@ -24,8 +21,8 @@ class CartButton extends StatefulWidget {
 
 class CartButtonState extends State<CartButton>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _animation;
+  late final AnimationController _animationController;
+  late final Animation<double> _animation;
 
   final Tween<Offset> _badgePositionTween = Tween(
     begin: const Offset(-0.5, 0.9),
@@ -48,7 +45,7 @@ class CartButtonState extends State<CartButton>
   Widget build(BuildContext context) {
     return IconButton(
       icon: Stack(
-        overflow: Overflow.visible,
+        clipBehavior: Clip.none,
         children: [
           const Icon(Icons.shopping_cart),
           Positioned(

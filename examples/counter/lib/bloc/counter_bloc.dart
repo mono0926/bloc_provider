@@ -7,7 +7,7 @@ class CounterBloc implements Bloc {
 
   CounterBloc() {
     _incrementController
-        .scan<int>((s, v, i) => s + 1, 0)
+        .scan<int>((s, v, i) => s! + 1, 0)
         .pipe(_countController);
   }
 

@@ -7,7 +7,7 @@ enum AppTheme { dark, light }
 class ThemeBloc extends Bloc {
   static var _currentTheme = AppTheme.light;
   final _themeController = StreamController<AppTheme>()..add(_currentTheme);
-  get theme => _themeController.stream;
+  Stream<AppTheme> get theme => _themeController.stream;
 
   void changeTheme() {
     _currentTheme =

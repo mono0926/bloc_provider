@@ -13,11 +13,11 @@ class App extends StatelessWidget {
         body: Center(
           child: StreamBuilder<int>(
             stream: bloc.count,
-            initialData: bloc.count.value,
+            initialData: bloc.count.valueWrapper?.value,
             builder: (context, snap) => Text(
-                  'count: ${snap.data}',
-                  style: Theme.of(context).textTheme.title,
-                ),
+              'count: ${snap.data}',
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(

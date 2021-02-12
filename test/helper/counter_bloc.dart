@@ -4,7 +4,7 @@ import 'package:rxdart/rxdart.dart';
 class CounterBloc implements Bloc {
   CounterBloc() {
     _incrementController
-        .scan<int>((s, v, i) => s + 1, 0)
+        .scan<int>((s, v, i) => s! + 1, 0)
         .pipe(_countController);
     print('bloc created');
   }

@@ -1,3 +1,7 @@
+## 1.0.0
+
+- Migrate to null safety
+
 ## 0.7.0
 
 - Update dependencies.

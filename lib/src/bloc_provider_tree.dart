@@ -45,9 +45,9 @@ import 'bloc_provider.dart';
 /// readability due to the reduction in nesting and boilerplate.
 class BlocProviderTree extends StatelessWidget {
   const BlocProviderTree({
-    Key key,
-    @required this.blocProviders,
-    @required this.child,
+    Key? key,
+    required this.blocProviders,
+    required this.child,
   }) : super(key: key);
 
   /// The [BlocProvider] list which is converted into

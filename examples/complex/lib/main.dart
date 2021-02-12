@@ -51,13 +51,13 @@ class MyHomePage extends StatelessWidget {
         actions: <Widget>[
           StreamBuilder<int>(
             stream: cartBloc.itemCount,
-            initialData: cartBloc.itemCount.value,
+            initialData: cartBloc.itemCount.valueWrapper?.value,
             builder: (context, snapshot) => CartButton(
-                  itemCount: snapshot.data,
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(BlocCartPage.routeName);
-                  },
-                ),
+              itemCount: snapshot.data!,
+              onPressed: () {
+                Navigator.of(context).pushNamed(BlocCartPage.routeName);
+              },
+            ),
           )
         ],
       ),
