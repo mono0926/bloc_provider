@@ -1,6 +1,5 @@
 import 'package:bloc_provider/bloc_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'helper/counter_bloc.dart';
@@ -16,7 +15,7 @@ void main() {
           builder: (context) {
             final bloc = BlocProvider.of<CounterBloc>(context);
             return StreamBuilder<int>(
-              initialData: bloc.count.valueWrapper?.value,
+              initialData: bloc.count.value,
               stream: bloc.count,
               builder: (context, snap) => Text('${snap.data}'),
             );
@@ -35,7 +34,7 @@ void main() {
       home: BlocProvider<CounterBloc>.builder(
         creator: (context, _bag) => bloc,
         builder: (context, bloc) => StreamBuilder<int>(
-          initialData: bloc.count.valueWrapper?.value,
+          initialData: bloc.count.value,
           stream: bloc.count,
           builder: (context, snap) => Text('${snap.data}'),
         ),
@@ -105,7 +104,7 @@ class _StatefulTestWidgetState extends State<StatefulTestWidget> {
             return bloc;
           },
           builder: (context, bloc) => StreamBuilder<int>(
-            initialData: bloc.count.valueWrapper?.value,
+            initialData: bloc.count.value,
             stream: bloc.count,
             builder: (context, snap) => Text('${snap.data}'),
           ),

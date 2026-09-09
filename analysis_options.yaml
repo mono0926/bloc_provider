@@ -1,2 +1,8 @@
-# https://pub.dev/packages/pedantic_mono
+analyzer:
+  exclude:
+    - build/**
+    - examples/**
 include: package:pedantic_mono/analysis_options.yaml
+linter:
+  rules:
+    one_member_abstracts: false
