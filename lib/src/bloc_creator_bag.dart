@@ -4,10 +4,10 @@ import 'package:flutter/widgets.dart';
 class BlocCreatorBag {
   VoidCallback? _onDisposed;
 
-  // ignore: use_setters_to_change_properties
   /// Register callbacks if needed.
   ///
   /// [onDisposed] is called when the inner State is disposed.
+  // ignore: use_setters_to_change_properties
   void register({VoidCallback? onDisposed}) {
     _onDisposed = onDisposed;
   }
