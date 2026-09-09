@@ -1,3 +1,8 @@
+## 1.0.1
+
+- Add AI Agent Skill (`bloc_provider-bloc`)
+- Add top-level example and resolve static analysis issues
+
 ## 1.0.0
 
 - Migrate to null safety
