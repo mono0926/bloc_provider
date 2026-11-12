@@ -1,3 +1,9 @@
+## 1.1.0
+
+- Require Dart `^3.14.0` and Flutter `>=3.50.0`
+- Adopt Dart 3.14 primary constructors and resolve all static analysis issues
+- Migrate example and tests to `package:material_ui`
+
 ## 1.0.1
 
 - Add AI Agent Skill (`bloc_provider-bloc`)
