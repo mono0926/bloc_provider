@@ -5,13 +5,14 @@ description: >-
 version: 1.0.1
 repository: https://github.com/mono0926/bloc_provider
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ^3.14.0
+  flutter: '>=3.50.0'
 dependencies:
   flutter:
     sdk: flutter
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic_mono: any
-  rxdart: '>=0.26.0 <1.0.0'
-flutter:
+  material_ui: ^1.11.0
+  pedantic_mono: ^1.39.0
+  rxdart: ^0.28.0

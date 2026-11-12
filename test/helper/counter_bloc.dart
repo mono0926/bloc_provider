@@ -1,12 +1,11 @@
 import 'package:bloc_provider/bloc_provider.dart';
 import 'package:rxdart/rxdart.dart';
 
-class CounterBloc implements Bloc {
-  CounterBloc() {
+class CounterBloc() implements Bloc {
+  this {
     _incrementController
         .scan<int>((s, v, i) => s + 1, 0)
         .pipe(_countController);
-    print('bloc created');
   }
 
   final _countController = BehaviorSubject<int>.seeded(0);
@@ -21,6 +20,5 @@ class CounterBloc implements Bloc {
     await _incrementController.close();
     await _countController.close();
     disposed = true;
-    print('disposed');
   }
 }

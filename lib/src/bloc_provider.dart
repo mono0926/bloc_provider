@@ -4,9 +4,13 @@ import 'bloc.dart';
 import 'bloc_creator_bag.dart';
 
 typedef BlocCreator<BlocType extends Bloc> = BlocType Function(
-    BuildContext context, BlocCreatorBag bag);
+  BuildContext context,
+  BlocCreatorBag bag,
+);
 typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
-    BuildContext context, BlocType bloc);
+  BuildContext context,
+  BlocType bloc,
+);
 
 /// Provides BLoC via this Provider.
 ///
@@ -33,7 +37,12 @@ typedef BlocBuilder<BlocType extends Bloc> = Widget Function(
 ///   static CounterBloc of(BuildContext context) => BlocProvider.of(context);
 /// }
 /// ```
-class BlocProvider<T extends Bloc> extends StatefulWidget {
+class const BlocProvider<T extends Bloc>.builder({
+  super.key,
+  required final BlocCreator<T> creator,
+  required final BlocBuilder<T> builder,
+  final bool autoDispose = true,
+}) extends StatefulWidget {
   /// Constructor for simple usage.
   ///
   /// The [child] parameter should be omitted if and only if
@@ -47,17 +56,17 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   ///   child: App(),
   /// )
   /// ```
-  BlocProvider({
+  new({
     Key? key,
     required BlocCreator<T> creator,
     Widget? child,
     bool autoDispose = true,
   }) : this.builder(
-          key: key,
-          creator: creator,
-          builder: (_context, _bloc) => child!,
-          autoDispose: autoDispose,
-        );
+         key: key,
+         creator: creator,
+         builder: (context, bloc) => child!,
+         autoDispose: autoDispose,
+       );
 
   /// Constructor for advanced usage.
   ///
@@ -77,12 +86,7 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   ///   },
   /// )
   /// ```
-  const BlocProvider.builder({
-    Key? key,
-    required this.creator,
-    required this.builder,
-    this.autoDispose = true,
-  }) : super(key: key);
+  this;
 
   /// Pass the bloc which is managed by other widget.
   ///
@@ -98,22 +102,22 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   ///
   /// ### Example
   ///
-  /// ```
+  /// ```dart
   /// BlocProvider<CounterBloc>.fromBloc(
   ///   bloc: BlocProvider<CounterBloc>.of(context),
   ///   child: AnotherPage(),
   /// )
   /// ```
-  BlocProvider.fromBloc({
+  new fromBloc({
     Key? key,
     required T bloc,
     required Widget child,
   }) : this(
-          key: key,
-          creator: (_context, _bag) => bloc,
-          child: child,
-          autoDispose: false,
-        );
+         key: key,
+         creator: (context, bag) => bloc,
+         child: child,
+         autoDispose: false,
+       );
 
   /// Pass the context that contains bloc which is managed by other widget.
   ///
@@ -124,25 +128,21 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   ///
   /// ### Example
   ///
-  /// ```
+  /// ```dart
   /// BlocProvider<CounterBloc>.fromBlocContext(
   ///   context: context, // context's widget tree should contains the bloc
   ///   child: AnotherPage(),
   /// )
   /// ```
-  BlocProvider.fromBlocContext({
+  new fromBlocContext({
     Key? key,
     required BuildContext context,
     required Widget child,
   }) : this.fromBloc(
-          key: key,
-          bloc: BlocProvider.of(context),
-          child: child,
-        );
-
-  final BlocCreator<T> creator;
-  final BlocBuilder<T> builder;
-  final bool autoDispose;
+         key: key,
+         bloc: BlocProvider.of(context),
+         child: child,
+       );
 
   /// Clone the current [BlocProvider] with a new child [Widget].
   ///
@@ -151,12 +151,12 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
     return BlocProvider<T>.builder(
       key: key,
       creator: creator,
-      builder: (_context, _bag) => child,
+      builder: (context, bag) => child,
     );
   }
 
   @override
-  _BlocProviderState createState() => _BlocProviderState<T>();
+  State<BlocProvider<T>> createState() => _BlocProviderState<T>();
 
   /// Return the [BlocType] of the closest ancestor [_Inherited].
   ///
@@ -175,7 +175,7 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
   ///
   /// ### You can also define your own [of] method for convenience:
   ///
-  /// ```
+  /// ```dart
   /// // Define of method at subclass.
   /// class CounterBlocProvider extends BlocProvider<CounterBloc> {
   ///   // ...
@@ -192,7 +192,7 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
       _Inherited.maybeOf<BlocType>(context);
 }
 
-class _BlocProviderState<BlocType extends Bloc>
+class _BlocProviderState<BlocType extends Bloc>()
     extends State<BlocProvider<BlocType>> {
   late final BlocType _bloc;
   final _bag = BlocCreatorBag();
@@ -227,12 +227,10 @@ class _BlocProviderState<BlocType extends Bloc>
 }
 
 @immutable
-class _Inherited<BlocType extends Bloc> extends InheritedWidget {
-  const _Inherited({
-    required this.bloc,
-    required Widget child,
-  }) : super(child: child);
-
+class const _Inherited<BlocType extends Bloc>({
+  required final BlocType bloc,
+  required super.child,
+}) extends InheritedWidget {
   static BlocType of<BlocType extends Bloc>(BuildContext context) {
     final widget = _of<BlocType>(context);
     if (widget == null) {
@@ -250,13 +248,13 @@ class _Inherited<BlocType extends Bloc> extends InheritedWidget {
   }
 
   static _Inherited<BlocType>? _of<BlocType extends Bloc>(
-      BuildContext context) {
+    BuildContext context,
+  ) {
     return context
-        .getElementForInheritedWidgetOfExactType<_Inherited<BlocType>>()
-        ?.widget as _Inherited<BlocType>?;
+            .getElementForInheritedWidgetOfExactType<_Inherited<BlocType>>()
+            ?.widget
+        as _Inherited<BlocType>?;
   }
-
-  final BlocType bloc;
 
   @override
   bool updateShouldNotify(_Inherited oldWidget) => false;
