@@ -1,6 +1,6 @@
 import 'package:bloc_provider/bloc_provider.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'helper/counter_bloc.dart';
 
@@ -10,7 +10,7 @@ void main() {
     final bloc = CounterBloc();
     final app = MaterialApp(
       home: BlocProvider<CounterBloc>(
-        creator: (context, _bag) => bloc,
+        creator: (context, bag) => bloc,
         child: Builder(
           builder: (context) {
             final bloc = BlocProvider.of<CounterBloc>(context);
@@ -32,7 +32,7 @@ void main() {
     final bloc = CounterBloc();
     final app = MaterialApp(
       home: BlocProvider<CounterBloc>.builder(
-        creator: (context, _bag) => bloc,
+        creator: (context, bag) => bloc,
         builder: (context, bloc) => StreamBuilder<int>(
           initialData: bloc.count.value,
           stream: bloc.count,
@@ -46,7 +46,7 @@ void main() {
 
   testWidgets('test disposing', (tester) async {
     final key = GlobalKey<_StatefulTestWidgetState>();
-    final app = StatefulTestWidget(key: key);
+    final app = _StatefulTestWidget(key: key);
 
     await tester.pumpWidget(app);
 
@@ -64,7 +64,10 @@ void main() {
 }
 
 Future<void> _performCounterTest(
-    WidgetTester tester, Widget app, CounterBloc bloc) async {
+  WidgetTester tester,
+  Widget app,
+  CounterBloc bloc,
+) async {
   await tester.pumpWidget(app);
 
   expect(find.text('0'), findsOneWidget);
@@ -83,13 +86,12 @@ Future<void> _performCounterTest(
   expect(find.text('3'), findsOneWidget);
 }
 
-class StatefulTestWidget extends StatefulWidget {
-  const StatefulTestWidget({Key? key}) : super(key: key);
+class const _StatefulTestWidget({super.key}) extends StatefulWidget {
   @override
   _StatefulTestWidgetState createState() => _StatefulTestWidgetState();
 }
 
-class _StatefulTestWidgetState extends State<StatefulTestWidget> {
+class _StatefulTestWidgetState() extends State<_StatefulTestWidget> {
   // shouldn't create bloc outside of creator callback for real app
   final CounterBloc bloc = CounterBloc();
   bool registeredOnDisposedCalled = false;
@@ -99,8 +101,8 @@ class _StatefulTestWidgetState extends State<StatefulTestWidget> {
     if (_userCounter) {
       return MaterialApp(
         home: BlocProvider<CounterBloc>.builder(
-          creator: (context, _bag) {
-            _bag.register(onDisposed: () => registeredOnDisposedCalled = true);
+          creator: (context, bag) {
+            bag.register(onDisposed: () => registeredOnDisposedCalled = true);
             return bloc;
           },
           builder: (context, bloc) => StreamBuilder<int>(

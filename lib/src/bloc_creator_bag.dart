@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 /// A bag for advanced requirements.
-class BlocCreatorBag {
+class BlocCreatorBag() {
   VoidCallback? _onDisposed;
 
   /// Register callbacks if needed.

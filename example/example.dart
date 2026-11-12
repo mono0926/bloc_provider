@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc_provider/bloc_provider.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-class CounterBloc implements Bloc {
-  CounterBloc() {
+class CounterBloc() implements Bloc {
+  this {
     _countController.add(0);
   }
 
@@ -25,15 +25,13 @@ class CounterBloc implements Bloc {
 }
 
 void main() => runApp(
-      BlocProvider<CounterBloc>(
-        creator: (_context, _bag) => CounterBloc(),
-        child: const MaterialApp(home: CounterPage()),
-      ),
-    );
+  BlocProvider<CounterBloc>(
+    creator: (context, bag) => CounterBloc(),
+    child: const MaterialApp(home: CounterPage()),
+  ),
+);
 
-class CounterPage extends StatelessWidget {
-  const CounterPage({Key? key}) : super(key: key);
-
+class const CounterPage({super.key}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<CounterBloc>(context);
